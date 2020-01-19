@@ -1,6 +1,9 @@
 require 'sinatra/base'
+require './lib/peeps'
 
 class Chitter < Sinatra::Base
+
+  enable :sessions
 
   get '/' do
     redirect '/sign_in'
@@ -11,6 +14,7 @@ class Chitter < Sinatra::Base
   end
 
   get '/homepage' do 
+    @peeps = Peeps.all 
     erb :homepage 
   end 
     
