@@ -13,4 +13,12 @@ describe Peeps do
       
     end
   end
+
+  describe '.create' do
+    it 'creates a new peep' do
+      Peeps.create('Hello Chitter')
+      expect(Peeps.all).to include 'Hello Chitter'
+
+    end
+  end
 end

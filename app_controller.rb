@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/peeps'
+require 'pg'
 
 class Chitter < Sinatra::Base
 
@@ -14,10 +15,15 @@ class Chitter < Sinatra::Base
   end
 
   get '/homepage' do
-    p ENV
     @peeps = Peeps.all 
     erb :homepage 
-  end 
+  end
+
+  post '/homepage' do
+    Peeps.create(params[:message])
+    redirect '/homepage'
+  end
+
     
 
   run! if app_file == $0

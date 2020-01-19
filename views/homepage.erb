@@ -7,27 +7,37 @@
   div#container{
    
     display: inline-block;
-    text-align: center;
     color: white;
     background: url("http://4designer.t7yb.net/files/20131210/Cartoon-blue-sky-vector-material-52072.jpg"); 
     background-size: 100% 110%;
-    font-family: "Comic Sans MS";  
+    font-family: "Comic Sans MS";
+  }
+
+  div#title{
+    text-align: center
   }
   div#instruction{
     color: black;
     font-weight: bold;
-    font-size: 17px
+    font-size: 17px;
+    text-align: center
   }
+
+
 
   </style>
   <br>
   
 </head>
 
+
 <div id="container">
 <body>
-<h1>Chitter 🐧 </h1> 
-<div style="width:300px;height:300px;line-height:3em;overflow:scroll;padding:10px;background-color:#191970;color:#00ffff;border:10px outset #6c6cff;">
+<form action="/" method="get">
+  <input type="submit" value="Log out">
+</form> 
+<div id=title><h1>Chitter 🐧 </h1></div>
+<div id="scroll_box" style="width:330px;height:300px;line-height:3em;overflow:scroll;padding:10px;background-color:#191970;color:#00ffff;border:10px outset #6c6cff;">
 
 <%=@peeps.map{|peep| "#{peep}<br>"}.join%>  
 
@@ -36,10 +46,10 @@
 </div>
 
 <div id="instruction">Share your thoughts!<div>
-<form action="/homepage" method="get">
 <br>
+<form action="/homepage" method="post">
 <textarea name="message" rows="5" cols="30"></textarea> <br>
-  <br><input type="submit" value="Peep"> <br>
+  <div id="peep-submit"><br><input type="submit" value="Peep"> <br></div>
   <br>
 </form> 
 </body>

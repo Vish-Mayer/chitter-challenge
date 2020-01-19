@@ -10,7 +10,9 @@ feature 'user homepage' do
     visit('/homepage')
 
     expect(page).to have_button("Peep")
+    expect(page).to have_button("Log out")
     expect(page).to have_content("Test Tweet")
     expect(page).to have_content("A bunch of Peeps")
+  
   end
 end
