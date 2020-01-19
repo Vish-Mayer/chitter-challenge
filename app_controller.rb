@@ -13,7 +13,8 @@ class Chitter < Sinatra::Base
     erb :sign_in 
   end
 
-  get '/homepage' do 
+  get '/homepage' do
+    p ENV
     @peeps = Peeps.all 
     erb :homepage 
   end 
