@@ -1,3 +1,12 @@
 <% if @user %>
   <h3>Signed in as, <%= @user.username %></h3>
 <% end %>
+
+<form class="" action="peep/new" method="post">
+  <input type="text" name="text_area" placeholder=""="Enter Peep">
+  <input type="submit" name="submit" value="Peep">
+</form>
+
+<% @peeps.each do |peep| %>
+  <%= peep.body %>
+<% end %>

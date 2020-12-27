@@ -6,6 +6,7 @@ $LOAD_PATH << './app/models'
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'user'
+require 'peep'
 require './lib/database_connection'
 
 class Chitter < Sinatra::Base
@@ -27,7 +28,13 @@ class Chitter < Sinatra::Base
 
   get('/peeps') do
     @user = User.find(id: session[:user_id])
+    @peeps = Peep.all
     erb :'peeps/index'
+  end
+
+  post('/peep/new') do
+    Peep.create(body: params[:text_area])
+    redirect('/peeps')
   end
 
   post('/chitter/users') do
