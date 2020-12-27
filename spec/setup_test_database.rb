@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+require 'pg'
 
 def setup_test_database
-  require 'pg'
 
   p 'Setting up test database...'
 
