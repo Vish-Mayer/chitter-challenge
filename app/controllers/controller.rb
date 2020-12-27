@@ -2,6 +2,7 @@
 
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'user'
 
 class Chitter < Sinatra::Base
 
@@ -25,7 +26,8 @@ class Chitter < Sinatra::Base
   end
 
   post('/chitter/users') do
-    DatabaseConnection.query("INSERT INTO users (username, email, password) VALUES ('#{params[:username]}', '#{params[:email]}', '#{params[:password]}')")
+    User.create(username: params[:username], email: params[:email], password: params[:password])
+    # "INSERT INTO users (username, email, password) VALUES ('#{params[:username]}', '#{params[:email]}', '#{params[:password]}')"
     session[:username] = params[:username]
     redirect('/peeps')
   end

@@ -1,4 +1,7 @@
 ENV['RACK_ENV'] = 'test'
+$LOAD_PATH << './lib'
+$LOAD_PATH << './app/controllers'
+$LOAD_PATH << './app/models'
 
 require File.join(File.dirname(__FILE__), '..', '/app/controllers/controller.rb')
 
