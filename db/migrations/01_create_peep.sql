@@ -1,2 +1,0 @@
-CREATE TABLE peeps(peep_number INTEGER PRIMARY KEY, url VARCHAR NOT NULL);
-
