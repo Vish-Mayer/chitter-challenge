@@ -8,10 +8,7 @@ feature 'user sign in' do
 
   scenario 'user can sign in with the correct account details' do
 
-    visit('/')
-    fill_in 'email', with: 'test@testmail.com'
-    fill_in 'password', with: 'password123'
-    click_button('submit')
+    sign_in
 
     expect(current_path).to eq '/peeps'
     expect(page).to have_content('test_username')
