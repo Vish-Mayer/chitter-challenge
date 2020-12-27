@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-feature 'user sign up' do
-  scenario 'user visits homepage and signs up to view peeps' do
+feature 'user sign in' do
+
+  before do
+  User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+  end
+  scenario 'user can sign in with the correct account details' do
     visit('/')
-    click_button('sign_up')
-    expect(current_path).to eq '/users/new'
-    fill_in 'username', with: 'test_username'
     fill_in 'email', with: 'test@testmail.com'
     fill_in 'password', with: 'Password123'
     click_button('submit')

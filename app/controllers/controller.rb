@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+$LOAD_PATH << './lib'
+$LOAD_PATH << './app/controllers'
+$LOAD_PATH << './app/models'
 
 require 'sinatra/base'
 require 'sinatra/flash'
@@ -11,6 +14,7 @@ class Chitter < Sinatra::Base
   set :public_folder, Proc.new { File.join(root, "../public") }
 
   enable :sessions
+  register Sinatra::Flash
 
   get('/') do
     erb :index
@@ -21,14 +25,24 @@ class Chitter < Sinatra::Base
   end
 
   get('/peeps') do
-    @username = session[:username]
+    @user = User.find(id: session[:user_id])
     erb :'peeps/index'
   end
 
   post('/chitter/users') do
-    User.create(username: params[:username], email: params[:email], password: params[:password])
-    # "INSERT INTO users (username, email, password) VALUES ('#{params[:username]}', '#{params[:email]}', '#{params[:password]}')"
-    session[:username] = params[:username]
+    user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     redirect('/peeps')
+  end
+
+  post('/sessions') do
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect('/peeps')
+    else
+      flash[:notice] = 'Please check your email or password.'
+      redirect('/')
+    end
   end
 end
