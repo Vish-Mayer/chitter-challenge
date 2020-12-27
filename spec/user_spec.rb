@@ -1,5 +1,6 @@
 require 'user'
 require 'data_matcher'
+require 'bcrypt'
 
 describe User do
 
@@ -10,6 +11,11 @@ describe User do
       expect(user.id).to eq data_matcher('id', 'users').first
       expect(user.username).to eq 'test_username'
       expect(user.email).to eq 'test@testmail.com'
+    end
+
+    it 'hashes out the password using Bcrypt' do
+      expect(BCrypt::Password).to receive(:create).with('password123')
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
     end
   end
 
