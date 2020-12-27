@@ -25,7 +25,7 @@ class Chitter < Sinatra::Base
   end
 
   post('/chitter/users') do
-    p params
+    DatabaseConnection.query("INSERT INTO users (username, email, password) VALUES ('#{params[:username]}', '#{params[:email]}', '#{params[:password]}')")
     session[:username] = params[:username]
     redirect('/peeps')
   end
