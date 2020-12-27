@@ -6,6 +6,7 @@ $LOAD_PATH << './app/models'
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'user'
+require './lib/database_connection'
 
 class Chitter < Sinatra::Base
 
