@@ -8,5 +8,7 @@
 </form>
 
 <% @peeps.each do |peep| %>
-  <%= peep.body %>
+  <ul>
+    <li><%= peep.body %></li>
+  </ul>
 <% end %>

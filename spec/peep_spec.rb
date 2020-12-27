@@ -5,8 +5,15 @@ describe Peep do
   describe '.all' do
     it 'returns all of the peeps' do
       Peep.create(body: 'this is a test peep')
+      peeps = Peep.all
+      expect(peeps.first.body).to eq('this is a test peep')
+    end
+
+    it 'returns all of the peeps in reverse chronological order' do
+      peep1 = Peep.create(body: 'this is a test peep')
+      peep2 = Peep.create(body: 'this is a newer peep')
       peep = Peep.all
-      expect(peep.first.body).to eq('this is a test peep')
+      expect(peep.first.body).to eq('this is a newer peep')
     end
   end
 
