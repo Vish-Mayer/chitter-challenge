@@ -2,6 +2,8 @@ require 'peep'
 
 describe Peep do
 
+  let(:convert_date_class) { double(:convert_date_class) }
+
   describe '.all' do
     it 'returns all of the peeps' do
       Peep.create(body: 'this is a test peep')
@@ -23,6 +25,14 @@ describe Peep do
       expect(peep.id).to eq data_matcher('id', 'peeps').first
       expect(peep.body).to eq data_matcher('body', 'peeps').first
       expect(peep.date).to eq Time.now.strftime("%Y-%m-%d")
+    end
+  end
+
+  describe '#created_at' do
+    it 'calls .where on the convert date class' do
+      peep = Peep.create(body: 'test peep')
+      expect(convert_date_class).to receive(:where).with(date: peep.date)
+      peep.created_at(convert_date_class)
     end
   end
 end

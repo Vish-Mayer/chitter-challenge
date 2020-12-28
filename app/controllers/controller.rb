@@ -7,7 +7,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 
 require './lib/database_connection'
-require './lib/data_convertor'
+require './lib/convert_date'
 
 require 'user'
 require 'peep'
