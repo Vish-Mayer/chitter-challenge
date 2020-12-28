@@ -1,3 +1,5 @@
+<link type="text/css" rel="stylesheet" href="css/peeps_index.css">
+
 <% if @user %>
   <h3>Signed in as, <%= @user.username %></h3>
 
@@ -6,16 +8,21 @@
     <input type="submit" name="submit" value="Peep">
   </form>
 
+  <% else %>
+  <h3>Sign in to use Chitter!</h3>
 <% end %>
 
 <% @peeps.each do |peep| %>
   <ul>
-    <li class="peep">
-      <%= peep.body %>
-      <%= peep.created_at %>
-      <% peep.user.each do |user| %>
-        <%= user.username %>
-      <% end %>
-    </li>
+    <div class="peep">
+      <div class="container">
+        <% peep.user.each do |user| %>
+          <h4><%= user.username %></h4>
+        <% end %>
+        <div class="created">
+          <%= peep.created_at %>
+        </div>
+      <p><%= peep.body %></p>
+    </div>
   </ul>
 <% end %>
