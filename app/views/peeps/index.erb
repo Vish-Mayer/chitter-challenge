@@ -9,6 +9,9 @@
 
 <% @peeps.each do |peep| %>
   <ul>
-    <li><%= peep.body %></li>
+    <li>
+      <%= peep.body %>
+      <%= peep.created_at %>
+    </li>
   </ul>
 <% end %>

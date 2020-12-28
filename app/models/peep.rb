@@ -30,7 +30,7 @@ class Peep
     @date = date
   end
 
-  # def converted_date(date)
-  #
-  # end
+  def created_at
+    Convert.date(date)
+  end
 end

@@ -24,6 +24,6 @@ feature 'viewing peeps' do
     click_button('submit')
 
     expect(page).to have_content('this is a test peep')
-    # expect(page).to have_content('today')
+    expect(page).to have_content('today')
   end
 end
