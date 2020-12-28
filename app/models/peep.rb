@@ -1,3 +1,5 @@
+require 'date'
+
 class Peep
 
   def self.all
@@ -27,4 +29,8 @@ class Peep
     @body = body
     @date = date
   end
+
+  # def converted_date(date)
+  #
+  # end
 end

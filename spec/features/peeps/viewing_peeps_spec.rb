@@ -14,6 +14,16 @@ feature 'viewing peeps' do
     click_button('submit')
 
     expect(page).to have_content('this is a test peep')
-    expect(page).to have_content('test_username')
+  end
+
+  scenario 'user can see when a peep was posted' do
+    sign_in
+    expect(current_path).to eq '/peeps'
+
+    fill_in 'text_area', with: 'this is a test peep'
+    click_button('submit')
+
+    expect(page).to have_content('this is a test peep')
+    # expect(page).to have_content('today')
   end
 end

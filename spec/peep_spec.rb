@@ -22,6 +22,7 @@ describe Peep do
       peep = Peep.create(body: 'this is a test peep')
       expect(peep.id).to eq data_matcher('id', 'peeps').first
       expect(peep.body).to eq data_matcher('body', 'peeps').first
+      expect(peep.date).to eq Time.now.strftime("%Y-%m-%d")
     end
   end
 end
