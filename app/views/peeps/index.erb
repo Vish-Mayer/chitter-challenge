@@ -13,6 +13,9 @@
     <li class="peep">
       <%= peep.body %>
       <%= peep.created_at %>
+      <% peep.user.each do |user| %>
+        <%= user.username %>
+      <% end %>
     </li>
   </ul>
 <% end %>

@@ -9,7 +9,7 @@ class User
       INTO users (username, email, password)
       VALUES ('#{username}', '#{email}', '#{encrypted_password}')
       RETURNING id, username, email;
-      ")
+    ")
     User.new(id: result[0]['id'], username: result[0]['username'], email: result[0]['email'])
   end
 
@@ -19,8 +19,21 @@ class User
       SELECT *
       FROM users
       WHERE id = '#{id}'
-      ")
+    ")
     User.new(id: result[0]['id'], username: result[0]['username'], email: result[0]['email'])
+  end
+
+  def self.where(peep_id:)
+    search = DatabaseConnection.query("
+      SELECT user_id, username, email
+      FROM user_peep as UP
+      INNER JOIN
+      users as US
+      ON UP.user_id = US.id
+      WHERE peep_id = '#{peep_id}'
+    ")
+    result = search.map { |all| all }
+    result.map { |user| User.new(id: user['user_id'], username: user['username'], email: user['email']) }
   end
 
   def self.authenticate(email:, password:)

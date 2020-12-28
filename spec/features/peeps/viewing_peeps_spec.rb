@@ -25,6 +25,6 @@ feature 'viewing peeps' do
 
     expect(first('.peep')).to have_content 'this is a test peep'
     expect(first('.peep')).to have_content 'today'
-    # expect(first('.peep')).to have_content 'test_username'
+    expect(first('.peep')).to have_content 'test_username'
   end
 end

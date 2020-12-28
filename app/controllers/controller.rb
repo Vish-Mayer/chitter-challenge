@@ -11,6 +11,7 @@ require './lib/convert_date'
 
 require 'user'
 require 'peep'
+require 'user_peep'
 
 class Chitter < Sinatra::Base
 
@@ -36,7 +37,8 @@ class Chitter < Sinatra::Base
   end
 
   post('/peep/new') do
-    Peep.create(body: params[:text_area])
+    peep = Peep.create(body: params[:text_area])
+    UserPeep.create(user_id: session[:user_id], peep_id: peep.id)
     redirect('/peeps')
   end
 

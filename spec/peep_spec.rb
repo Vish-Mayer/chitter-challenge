@@ -2,6 +2,7 @@ require 'peep'
 
 describe Peep do
 
+  let(:user_class) { double(:user_class) }
   let(:convert_date_class) { double(:convert_date_class) }
 
   describe '.all' do
@@ -25,6 +26,14 @@ describe Peep do
       expect(peep.id).to eq data_matcher('id', 'peeps').first
       expect(peep.body).to eq data_matcher('body', 'peeps').first
       expect(peep.date).to eq Time.now.strftime("%Y-%m-%d")
+    end
+  end
+
+  describe '#user' do
+    it 'calls .where on the user class' do
+      peep = Peep.create(body: 'test peep')
+      expect(user_class).to receive(:where).with(peep_id: peep.id)
+      peep.user(user_class)
     end
   end
 
