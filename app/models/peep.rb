@@ -34,6 +34,10 @@ class Peep
     user_class.where(peep_id: id)
   end
 
+  def hashtags(hashtag_class = HashTag)
+    hashtag_class.where(peep_id: id)
+  end
+
   def created_at(convert_date_class = ConvertDate)
     convert_date_class.where(date: date)
   end

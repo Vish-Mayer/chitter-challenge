@@ -3,6 +3,7 @@ require 'peep'
 describe Peep do
 
   let(:user_class) { double(:user_class) }
+  let(:hashtag_class) { double(:hashtag_class) }
   let(:convert_date_class) { double(:convert_date_class) }
 
   describe '.all' do
@@ -34,6 +35,14 @@ describe Peep do
       peep = Peep.create(body: 'test peep')
       expect(user_class).to receive(:where).with(peep_id: peep.id)
       peep.user(user_class)
+    end
+  end
+
+  describe '#hashtag' do
+    it 'calls .where on the hashtag class' do
+      peep = Peep.create(body: 'test peep')
+      expect(hashtag_class).to receive(:where).with(peep_id: peep.id)
+      peep.user(hashtag_class)
     end
   end
 

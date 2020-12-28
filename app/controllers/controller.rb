@@ -11,7 +11,9 @@ require './lib/convert_date'
 
 require 'user'
 require 'peep'
+require 'hashtag'
 require 'user_peep'
+require 'hashtag_peep'
 
 class Chitter < Sinatra::Base
 
@@ -37,7 +39,9 @@ class Chitter < Sinatra::Base
   end
 
   post('/peep/new') do
+    hashtag = HashTag.scan(content: params[:text_area])
     peep = Peep.create(body: params[:text_area])
+    HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
     UserPeep.create(user_id: session[:user_id], peep_id: peep.id)
     redirect('/peeps')
   end
