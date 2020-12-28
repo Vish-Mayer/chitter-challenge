@@ -30,6 +30,17 @@ describe Peep do
     end
   end
 
+  describe '.where' do
+    it 'it finds the peeps with a given hashtag id' do
+      peep = Peep.create(body: 'this is a test peep')
+      hashtag = HashTag.create(hashtag: "#hashtag")
+      hashtag_peep = HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
+
+      expect(hashtag.id).to eq hashtag_peep.hashtag_id
+      expect(peep.id).to eq hashtag_peep.peep_id
+    end
+  end
+
   describe '#user' do
     it 'calls .where on the user class' do
       peep = Peep.create(body: 'test peep')

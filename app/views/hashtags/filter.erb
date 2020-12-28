@@ -1,0 +1,23 @@
+<h3>Filtered by <%= @tag_name %></h3>
+
+<% @hashtag.peeps.each do |peep| %>
+  <ul>
+    <div class="peep">
+      <div class="container">
+        <!-- peep user -->
+        <% peep.user.each do |user| %>
+          <h4><%= user.username %></h4>
+        <% end %>
+        <!-- peep date -->
+        <div class="created">
+          <%= peep.created_at %>
+        </div>
+        <!-- peep body -->
+      <p><%= peep.body %></p>
+        <!-- peep hashtags -->
+      <% peep.hashtags.each do |tag| %>
+        <input type="submit" name="display_tag" value="<%= tag.content %>">
+      <% end %>
+    </div>
+  </ul>
+<% end %>

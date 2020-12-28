@@ -46,6 +46,12 @@ class Chitter < Sinatra::Base
     redirect('/peeps')
   end
 
+  get('/peeps/hashtags/:id') do
+    @hashtag = HashTag.find(id: params[:id])
+    @tag_name = params[:display_tag]
+    erb :'hashtags/filter'
+  end
+
   post('/chitter/users') do
     user = User.create(username: params[:username], email: params[:email], password: params[:password])
     session[:user_id] = user.id

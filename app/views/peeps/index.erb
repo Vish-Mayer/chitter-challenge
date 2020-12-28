@@ -26,9 +26,11 @@
         </div>
         <!-- peep body -->
       <p><%= peep.body %></p>
-
+        <!-- peep hashtags -->
       <% peep.hashtags.each do |tag| %>
-        <input type="submit" name="display_tag" value="<%= tag.content %>">
+        <form class="" action="peeps/hashtags/<%= tag.id %>" method="get">
+           <input type="submit" name="display_tag" value="<%= tag.content %>">
+        </form>
       <% end %>
     </div>
   </ul>

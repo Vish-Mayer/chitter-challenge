@@ -2,6 +2,8 @@ require 'hashtag'
 
 describe HashTag do
 
+  let(:peep_class) { double(:peep_class) }
+
   describe '.scan' do
 
     it 'scans through a given string to create a hashtag' do
@@ -27,6 +29,14 @@ describe HashTag do
 
       expect(hashtag.id).to eq hashtag_peep.hashtag_id
       expect(peep.id).to eq hashtag_peep.peep_id
+    end
+  end
+
+  describe '#peeps' do
+    it 'calls .where on the user class' do
+      hashtag = HashTag.create(hashtag: "#hashtag")
+      expect(peep_class).to receive(:where).with(hashtag_id: hashtag.id)
+      hashtag.peeps(peep_class)
     end
   end
 end
