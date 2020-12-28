@@ -7,11 +7,12 @@ class Convert
   def self.date(date, current_date = CURRENT_DATE)
     value = date.split("-")
     input_date = (DateTime.new(value[0].to_i, value[1].to_i, value[2].to_i))
-
     answer = current_date - input_date
 
     if answer == (0/1)
       "today"
+    elsif answer == (1/1)
+      "yesterday"
     end
   end
 end
