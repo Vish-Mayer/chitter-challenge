@@ -8,11 +8,14 @@ class Convert
     value = date.split("-")
     input_date = (DateTime.new(value[0].to_i, value[1].to_i, value[2].to_i))
     answer = current_date - input_date
+    answer = answer.to_s[0...-2].to_i
 
-    if answer == (0/1)
+    if answer == 0
       "today"
-    elsif answer == (1/1)
+    elsif answer == 1
       "yesterday"
+    elsif answer > 1
+      "#{answer} days ago"
     end
   end
 end
