@@ -12,8 +12,8 @@ describe HashTag do
       hashtag = HashTag.scan(body: "Im a #hashtag #dude")
       hashtag.map { |hashtag| hashtags << hashtag }
 
-      expect(hashtags[0].content).to eq " #hashtag"
-      expect(hashtags[1].content).to eq " #dude"
+      expect(hashtags[0].content).to eq "#hashtag"
+      expect(hashtags[1].content).to eq "#dude"
     end
   end
 
