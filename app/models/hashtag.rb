@@ -2,8 +2,8 @@ class HashTag
 
   @hashtags = nil
 
-  def self.scan(content:)
-    result = content.to_enum(:scan, /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i ).map { Regexp.last_match }
+  def self.scan(body:)
+    result = body.to_enum(:scan, /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i ).map { Regexp.last_match }
     result.map { |hashtag| HashTag.create(hashtag: hashtag) }
   end
 

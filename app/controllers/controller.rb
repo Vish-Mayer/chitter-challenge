@@ -39,7 +39,7 @@ class Chitter < Sinatra::Base
   end
 
   post('/peep/new') do
-    hashtags = HashTag.scan(content: params[:text_area])
+    hashtags = HashTag.scan(body: params[:text_area])
     peep = Peep.create(body: params[:text_area])
     hashtags.map { |hashtag|
       HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)

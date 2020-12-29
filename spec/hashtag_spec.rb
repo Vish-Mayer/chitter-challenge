@@ -9,7 +9,7 @@ describe HashTag do
 
     it 'scans through the given string to identify a hashtag' do
       hashtags = []
-      hashtag = HashTag.scan(content: "Im a #hashtag #dude")
+      hashtag = HashTag.scan(body: "Im a #hashtag #dude")
       hashtag.map { |hashtag| hashtags << hashtag }
 
       expect(hashtags[0].content).to eq " #hashtag"
