@@ -4,6 +4,14 @@ require 'bcrypt'
 
 describe User do
 
+  describe '.all' do
+    it 'returns a list of all of the registered users' do
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user = User.all
+      expect(user.first.username).to eq('test_username')
+    end
+  end
+
   describe '.create' do
 
     it 'creates a new user' do

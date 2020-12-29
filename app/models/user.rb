@@ -2,6 +2,16 @@ require 'bcrypt'
 
 class User
 
+  def self.all
+    result = DatabaseConnection.query('
+      SELECT *
+      FROM users
+      ')
+    result.map { |user|
+      User.new(id: user['id'], username: user['username'], email: user['email'])
+    }
+  end
+
   def self.create(username:, email:, password:)
     encrypted_password = BCrypt::Password.create(password)
     result = DatabaseConnection.query("

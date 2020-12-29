@@ -34,6 +34,7 @@ class Chitter < Sinatra::Base
 
   get('/peeps') do
     @user = User.find(id: session[:user_id])
+    @users = User.all
     @peeps = Peep.all
     erb :'peeps/index'
   end
@@ -52,6 +53,10 @@ class Chitter < Sinatra::Base
     @hashtag = HashTag.find(id: params[:id])
     @tag_name = params[:display_tag]
     erb :'hashtags/filter'
+  end
+
+  post('/peeps/:id/tag_user') do
+    p params
   end
 
   post('/chitter/users') do

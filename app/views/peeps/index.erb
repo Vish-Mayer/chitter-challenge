@@ -41,6 +41,22 @@
            <input type="submit" name="display_tag" value="<%= tag.content %>">
         </form>
       <% end %>
+
+      <% if @user %>
+
+        <form class="" action="/peeps/<%= peep.id %>/tag_user" method="post">
+          <div class="custom-select"  style="width:200px;">
+            <select name="select-user">
+              <option value="0">Tag a user:</option>
+              <% @users.each do |user| %>
+              <option value="<%= user.id %>"> <%= user.username %> </option>
+              <% end %>
+            </select>
+          </div>
+          <input type="submit" name="tag_user" value="Tag">
+        </form>
+
+      <% end %>
     </div>
   </ul>
 <% end %>

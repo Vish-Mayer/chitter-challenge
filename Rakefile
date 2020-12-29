@@ -49,6 +49,7 @@ task development_tables: [:database] do
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE hashtags(id SERIAL PRIMARY KEY, content VARCHAR(60));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE user_peep(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE hashtag_peep(id SERIAL PRIMARY KEY, hashtag_id INTEGER REFERENCES hashtags (id), peep_id INTEGER REFERENCES peeps (id));"]
+  sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE tag_user(id SERIAL PRIMARY KEY, peep_id INTEGER REFERENCES peeps (id), user_id INTEGER REFERENCES users (id));"]
 end
 
 task development_tables: [:database] do
@@ -58,6 +59,7 @@ task development_tables: [:database] do
   sh %[psql -U #{ENV['USER']} -d chitter --command="INSERT INTO hashtags (content) VALUES ('#chitter');"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="INSERT INTO user_peep (user_id, peep_id) VALUES (1, 1);"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="INSERT INTO hashtag_peep (hashtag_id, peep_id) VALUES (1, 1);"]
+  sh %[psql -U #{ENV['USER']} -d chitter --command="INSERT INTO tag_user (peep_id, user_id) VALUES (1, 1);"]
 end
 
 task test_tables: [:development_tables] do
@@ -67,4 +69,5 @@ task test_tables: [:development_tables] do
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE hashtags(id SERIAL PRIMARY KEY, content VARCHAR(60));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE user_peep(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE hashtag_peep(id SERIAL PRIMARY KEY, hashtag_id INTEGER REFERENCES hashtags (id), peep_id INTEGER REFERENCES peeps (id));"]
+  sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE tag_user(id SERIAL PRIMARY KEY, peep_id INTEGER REFERENCES peeps (id), user_id INTEGER REFERENCES users (id));"]
 end
