@@ -1,6 +1,11 @@
 <link type="text/css" rel="stylesheet" href="css/peeps_index.css">
 
 <% if @user %>
+
+<form action="/sessions/destroy" method="post">
+  <input type="submit" name="sign_out" value="Sign out" />
+</form>
+
   <h3>Signed in as, <%= @user.username %></h3>
 
   <form class="" action="peep/new" method="post">
