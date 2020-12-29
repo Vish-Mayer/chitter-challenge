@@ -21,6 +21,12 @@ describe HashTag do
       expect(hashtag.id).to eq data_matcher('id', 'hashtags').first
       expect(hashtag.content).to eq data_matcher('content', 'hashtags').first
     end
+
+    it 'uses an existing hashtag when it exists in the hashtag table' do
+      hashtag = HashTag.create(hashtag: "#hashtag")
+      hashtag2 = HashTag.create(hashtag: "#hashtag")
+      expect(hashtag.id).to eq hashtag2.id
+    end
   end
 
   describe '.where' do

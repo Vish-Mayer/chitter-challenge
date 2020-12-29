@@ -2,16 +2,20 @@
 
 <% if @user %>
 
-<form action="/sessions/destroy" method="post">
-  <input type="submit" name="sign_out" value="Sign out" />
-</form>
-
-  <h3>Signed in as, <%= @user.username %></h3>
-
-  <form class="" action="peep/new" method="post">
-    <input type="text" name="text_area" placeholder=""="Enter Peep">
-    <input type="submit" name="submit" value="Peep">
+<div class="sign-out-btn">
+  <form action="/sessions/destroy" method="post">
+    <input type="submit" name="sign_out" value="Sign out" />
   </form>
+</div>
+
+  <h2>Signed in as, <%= @user.username %></h2>
+
+  <div class="form">
+    <form class="" action="peep/new" method="post">
+      <input type="text" name="text_area" placeholder=""="Enter Peep">
+      <input type="submit" name="submit" value="Peep">
+    </form>
+  </div>
 
   <% else %>
   <h3>Sign in to use Chitter!</h3>

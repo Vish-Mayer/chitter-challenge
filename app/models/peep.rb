@@ -10,7 +10,7 @@ class Peep
       ')
     result.map { |peep|
       Peep.new(id: peep['id'], body: peep['body'], date: peep['date'])
-    }    
+    }
   end
 
   def self.create(body:)
@@ -31,6 +31,7 @@ class Peep
       peeps as P
       ON HP.peep_id = P.id
       WHERE hashtag_id = #{hashtag_id}
+      Order by P.id DESC
       ")
     result = search.map { |all| all }
     result.map { |user| Peep.new(id: user['peep_id'], body: user['body'], date: user['date']) }
