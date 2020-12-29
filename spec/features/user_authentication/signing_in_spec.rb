@@ -3,7 +3,7 @@
 feature 'user sign in' do
 
   before do
-  User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+    User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
   end
 
   scenario 'user can sign in with the correct account details' do

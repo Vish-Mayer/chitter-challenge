@@ -9,7 +9,8 @@ class Peep
       Order by id DESC
       ')
     result.map { |peep|
-    Peep.new(id: peep['id'], body: peep['body'], date: peep['date']) }
+      Peep.new(id: peep['id'], body: peep['body'], date: peep['date'])
+    }    
   end
 
   def self.create(body:)
@@ -37,7 +38,7 @@ class Peep
 
   attr_reader :id, :body, :date
 
-  def initialize(id:, body:, date: )
+  def initialize(id:, body:, date:)
     @id = id
     @body = body
     @date = date

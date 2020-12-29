@@ -1,6 +1,6 @@
 class HashTagPeep
 
-  def self.create(hashtag_id:, peep_id: )
+  def self.create(hashtag_id:, peep_id:)
     result = DatabaseConnection.query(
       "INSERT
       INTO hashtag_peep (hashtag_id, peep_id)

@@ -1,7 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 $LOAD_PATH << './app/controllers'
 
-
 require File.join(File.dirname(__FILE__), '..', '/app/controllers/controller.rb')
 
 require 'capybara'

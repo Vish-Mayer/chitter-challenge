@@ -7,8 +7,10 @@ describe HashTag do
   describe '.scan' do
 
     it 'scans through a given string to create a hashtag' do
-      hashtag = HashTag.scan(content: "This is a #hashtag")
-      expect(hashtag.content).to eq '#hashtag'
+      hashtag = HashTag.scan(content: "Im a #hashtag")
+      hashtag.each { |hashtag|
+        expect(hashtag.content).to eq " #hashtag"
+      }
     end
   end
 
