@@ -14,6 +14,7 @@ require 'peep'
 require 'hashtag'
 require 'user_peep'
 require 'hashtag_peep'
+require 'tag_user'
 
 class Chitter < Sinatra::Base
 
@@ -56,7 +57,8 @@ class Chitter < Sinatra::Base
   end
 
   post('/peeps/:id/tag_user') do
-    p params
+    TagUser.create(peep_id: params[:id], user_id: session[:user_id], tagged_user_id: params[:select_user])
+    redirect('/peeps')
   end
 
   post('/chitter/users') do

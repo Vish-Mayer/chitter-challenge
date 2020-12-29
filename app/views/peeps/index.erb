@@ -45,8 +45,8 @@
       <% if @user %>
 
         <form class="" action="/peeps/<%= peep.id %>/tag_user" method="post">
-          <div class="custom-select"  style="width:200px;">
-            <select name="select-user">
+          <div class="custom_select"  style="width:200px;">
+            <select name="select_user">
               <option value="0">Tag a user:</option>
               <% @users.each do |user| %>
               <option value="<%= user.id %>"> <%= user.username %> </option>
