@@ -5,18 +5,17 @@ describe Peep do
   let(:user_class) { double(:user_class) }
   let(:hashtag_class) { double(:hashtag_class) }
   let(:convert_date_class) { double(:convert_date_class) }
+  subject(:peep) { Peep.create(body: 'this is a test peep') }
 
   describe '.all' do
     it 'returns all of the peeps' do
-      Peep.create(body: 'this is a test peep')
+      peep = Peep.create(body: 'this is a test peep')
       peeps = Peep.all
-
       expect(peeps.first.body).to eq('this is a test peep')
     end
 
     it 'returns all of the peeps in reverse chronological order' do
 
-      peep1 = Peep.create(body: 'this is a test peep')
       peep2 = Peep.create(body: 'this is a newer peep')
       peep = Peep.all
 
@@ -28,8 +27,6 @@ describe Peep do
 
     it 'creates a new peep' do
 
-      peep = Peep.create(body: 'this is a test peep')
-
       expect(peep.id).to eq data_matcher('id', 'peeps').first
       expect(peep.body).to eq data_matcher('body', 'peeps').first
       expect(peep.date).to eq Time.now.strftime("%Y-%m-%d")
@@ -40,7 +37,6 @@ describe Peep do
 
     it 'it finds the peeps with a given hashtag id' do
 
-      peep = Peep.create(body: 'this is a test peep')
       hashtag = HashTag.create(hashtag: "#hashtag")
       hashtag_peep = HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
 
@@ -50,9 +46,8 @@ describe Peep do
 
     it 'returns filtered peeps filtered by a hashtag in reverse chronological order' do
 
-      peep1 = Peep.create(body: 'this is a test peep')
       hashtag = HashTag.create(hashtag: "#hashtag")
-      hashtag_peep1 = HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep1.id)
+      hashtag_peep1 = HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
 
       peep2 = Peep.create(body: 'this is a newer test peep')
       hashtag2 = HashTag.create(hashtag: "#hashtag")
@@ -67,7 +62,6 @@ describe Peep do
   describe '#user' do
     it 'calls .where on the user class' do
 
-      peep = Peep.create(body: 'test peep')
       expect(user_class).to receive(:where).with(peep_id: peep.id)
       peep.user(user_class)
     end
@@ -76,7 +70,6 @@ describe Peep do
   describe '#hashtag' do
     it 'calls .where on the hashtag class' do
 
-      peep = Peep.create(body: 'test peep')
       expect(hashtag_class).to receive(:where).with(peep_id: peep.id)
       peep.user(hashtag_class)
     end
@@ -85,8 +78,6 @@ describe Peep do
   describe '#created_at' do
 
     it 'calls .where on the convert date class' do
-
-      peep = Peep.create(body: 'test peep')
 
       expect(convert_date_class).to receive(:where).with(date: peep.date)
       peep.created_at(convert_date_class)
