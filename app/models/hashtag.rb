@@ -3,7 +3,7 @@ class HashTag
   @hashtags = nil
 
   def self.scan(content:)
-    result = content.to_enum(:scan, /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).map { Regexp.last_match }
+    result = content.to_enum(:scan, /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i ).map { Regexp.last_match }
     result.map { |hashtag| HashTag.create(hashtag: hashtag) }
   end
 
@@ -14,12 +14,14 @@ class HashTag
       content = '#{hashtag}'
       ").first
 
-    result ||= DatabaseConnection.query("
+    if !result
+      result = DatabaseConnection.query("
       INSERT
       INTO hashtags (content)
       VALUES('#{hashtag}')
       RETURNING id, content;
       ").first
+    end
     HashTag.new(id: result['id'], content: result['content'])
   end
 
@@ -38,7 +40,7 @@ class HashTag
       WHERE peep_id = #{peep_id}
       ")
     result = search.map { |all| all }
-    result.map { |hashtag| HashTag.new(id: hashtag['hashtag_id'], content: hashtag['content'],) }
+    result.map { |hashtag| HashTag.new(id: hashtag['hashtag_id'], content: hashtag['content'],)}
   end
 
   attr_reader :id, :content
