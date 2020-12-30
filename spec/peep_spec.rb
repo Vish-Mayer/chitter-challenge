@@ -51,11 +51,34 @@ describe Peep do
 
       peep2 = Peep.create(body: 'this is a newer test peep')
       hashtag2 = HashTag.create(hashtag: "#hashtag")
-      hashtag_peep3 = HashTagPeep.create(hashtag_id: hashtag2.id, peep_id: peep2.id)
+      hashtag_peep2 = HashTagPeep.create(hashtag_id: hashtag2.id, peep_id: peep2.id)
 
       peep = Peep.where(hashtag_id: hashtag.id)
 
       expect(peep.first.body).to eq('this is a newer test peep')
+    end
+  end
+
+  describe '.users' do
+
+    it 'it finds the peeps with a given user id' do
+
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user_peep = UserPeep.create(user_id: user.id, peep_id: peep.id)
+
+      expect(user.id).to eq user_peep.user_id
+      expect(peep.id).to eq user_peep.peep_id
+    end
+
+    it 'returns filtered peeps filtered by a hashtag in reverse chronological order' do
+
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user_peep = UserPeep.create(user_id: user.id, peep_id: peep.id)
+      peep2 = Peep.create(body: 'this is a newer test peep')
+      user_peep = UserPeep.create(user_id: user.id, peep_id: peep2.id)
+      peeps = Peep.users(user_id: user.id)
+
+      expect(peeps.first.body).to eq('this is a newer test peep')
     end
   end
 

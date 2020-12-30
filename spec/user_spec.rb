@@ -4,6 +4,8 @@ require 'bcrypt'
 
 describe User do
 
+  let(:peep_class) {double(:peep_class)}
+
   describe '.all' do
     it 'returns a list of all of the registered users' do
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
@@ -57,6 +59,14 @@ describe User do
 
       expect(user.id).to eq user_peep.user_id
       expect(peep.id).to eq user_peep.peep_id
+    end
+  end
+
+  describe '#peeps' do
+    it 'calls .users on the peep class' do
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      expect(peep_class).to receive(:users).with(user_id: user.id)
+      user.peeps(peep_class)
     end
   end
 end

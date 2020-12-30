@@ -70,6 +70,11 @@ class Chitter < Sinatra::Base
     redirect('/peeps')
   end
 
+  get('/user_page') do
+    @user = User.find(id: session[:user_id])
+    erb :'users/index'
+  end
+
   post('/chitter/users') do
     user = User.create(username: params[:username], email: params[:email], password: params[:password])
     session[:user_id] = user.id

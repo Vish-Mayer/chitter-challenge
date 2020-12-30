@@ -66,4 +66,8 @@ class User
     @email = email
     @username = username
   end
+
+  def peeps(peep_class = Peep)
+    peep_class.users(user_id: id)
+  end
 end
