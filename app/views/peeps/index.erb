@@ -21,6 +21,8 @@
   <h3>Sign in to use Chitter!</h3>
 <% end %>
 
+<h3><%= flash[:notice] %></h3>
+
 <% @peeps.each do |peep| %>
   <ul>
     <div class="peep">
@@ -38,10 +40,10 @@
         <!-- peep hashtags -->
       <% peep.hashtags.each do |tag| %>
         <form class="" action="peeps/hashtags/<%= tag.id %>" method="get">
-           <input type="submit" name="display_tag" value="<%= tag.content %>">
+           <input class="hashtag" type="submit" name="display_tag" value="<%= tag.content %>">
         </form>
       <% end %>
-
+      <!-- tagging a user -->
       <% if @user %>
 
         <form class="" action="/peeps/<%= peep.id %>/tag_user" method="post">

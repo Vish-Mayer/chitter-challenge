@@ -5,7 +5,7 @@ include SendGrid
 
 class Email
     def self.send(tagged_user:, user:)
-    from = SendGrid::Email.new(email: ENV['FROM_EMAIL'])
+    from = SendGrid::Email.new(email: 'vish.mayer@gmail.com')
     to = SendGrid::Email.new(email: tagged_user)
     subject = "#{user} has tagged you in a post!"
     content = SendGrid::Content.new(type: 'text/plain', value: "#{user} has tagged you in a post")
@@ -17,6 +17,6 @@ class Email
     puts response.status_code
     puts response.body
     puts response.headers
-    p "emai sent"
+    p "email sent"
   end
 end

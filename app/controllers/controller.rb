@@ -58,10 +58,15 @@ class Chitter < Sinatra::Base
   end
 
   post('/peeps/:id/tag_user') do
-    TagUser.create(peep_id: params[:id], user_id: session[:user_id], tagged_user_id: params[:select_user])
-    tagged_user = User.find(id: params[:select_user])
-    user = User.find(id: session[:user_id])
-    Email.send(tagged_user: tagged_user.email, user: user.username)
+
+    if params[:select_user] != "0"
+      TagUser.create(peep_id: params[:id], user_id: session[:user_id], tagged_user_id: params[:select_user])
+      tagged_user = User.find(id: params[:select_user])
+      user = User.find(id: session[:user_id])
+      Email.send(tagged_user: tagged_user.email, user: user.username)
+    else
+      flash[:notice] = 'Select a user to tag'
+    end
     redirect('/peeps')
   end
 
