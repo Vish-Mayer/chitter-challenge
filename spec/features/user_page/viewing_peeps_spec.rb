@@ -1,10 +1,10 @@
 feature 'viewing own peeps' do
 
   before do
-    user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-    peep = Peep.create(body: 'this is a test peep')
-    UserPeep.create(user_id: user.id, peep_id: peep.id)
-    peep2 = Peep.create(body: 'this is another test peep')
+    @user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+    @peep = Peep.create(body: 'this is a test peep')
+    UserPeep.create(user_id: @user.id, peep_id: @peep.id)
+    @peep2 = Peep.create(body: 'this is another test peep')
   end
 
   scenario 'user can log in and click on their username to see peeps made by the user' do
@@ -18,5 +18,18 @@ feature 'viewing own peeps' do
     expect(current_path).to eq('/user_page')
     expect(page).to have_content 'this is a test peep'
     expect(page).not_to have_content 'this is another test peep'
+  end
+
+  scenario 'user can see peeps that they have been tagged in' do
+
+    user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+    TagUser.create(peep_id: @peep2.id, user_id: user2.id, tagged_user_id: @user.id)
+    sign_in
+    visit('/peeps')
+    click_link('test_username')
+
+    expect(current_path).to eq('/user_page')
+    expect(page).to have_content 'this is a test peep'
+    expect(page).to have_content 'this is another test peep'
   end
 end

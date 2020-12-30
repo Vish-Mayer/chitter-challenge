@@ -82,6 +82,31 @@ describe Peep do
     end
   end
 
+  describe '.tagged_users' do
+
+    it 'it finds the peeps with a given tagged_user id' do
+
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user_tag = TagUser.create(peep_id: peep.id, user_id: user.id, tagged_user_id: user2.id)
+
+      expect(user.id).to eq user_tag.user_id
+      expect(peep.id).to eq user_tag.peep_id
+    end
+
+    it 'returns filtered peeps in reverse chronological order' do
+
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user_tag = TagUser.create(peep_id: peep.id, user_id: user.id, tagged_user_id: user2.id)
+      peep2 = Peep.create(body: 'this is a newer test peep')
+      user_tag = TagUser.create(peep_id: peep2.id, user_id: user.id, tagged_user_id: user2.id)
+      peeps = Peep.tagged_users(tagged_user_id: user2.id)
+
+      expect(peeps.first.body).to eq('this is a newer test peep')
+    end
+  end
+
   describe '#user' do
     it 'calls .where on the user class' do
 

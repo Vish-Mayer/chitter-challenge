@@ -51,6 +51,20 @@ class Peep
     result.map { |user| Peep.new(id: user['peep_id'], body: user['body'], date: user['date']) }
   end
 
+  def self.tagged_users(tagged_user_id:)
+    search = DatabaseConnection.query("
+      SELECT *
+      FROM tag_user as TU
+      INNER JOIN
+      peeps as P
+      ON TU.peep_id = P.id
+      WHERE tagged_user_id = #{tagged_user_id}
+      Order by P.id DESC
+      ")
+    result = search.map { |all| all }
+    result.map { |user| Peep.new(id: user['peep_id'], body: user['body'], date: user['date']) }
+  end
+
   attr_reader :id, :body, :date
 
   def initialize(id:, body:, date:)

@@ -70,4 +70,8 @@ class User
   def peeps(peep_class = Peep)
     peep_class.users(user_id: id)
   end
+
+  def tagged_peeps(peep_class = Peep)
+    peep_class.tagged_users(tagged_user_id: id)
+  end
 end
