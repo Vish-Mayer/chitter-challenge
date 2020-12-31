@@ -26,7 +26,6 @@ describe Peep do
   describe '.create' do
 
     it 'creates a new peep' do
-
       expect(peep.id).to eq data_matcher('id', 'peeps').first
       expect(peep.body).to eq data_matcher('body', 'peeps').first
       expect(peep.date).to eq Time.now.strftime("%Y-%m-%d")
@@ -84,26 +83,21 @@ describe Peep do
 
   describe '.tagged_users' do
 
-    it 'it finds the peeps with a given tagged_user id' do
+    it 'it finds a tagged peep with a given tagged_user id - returns in reverse chronological order' do
 
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-      user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-      user_tag = TagUser.create(peep_id: peep.id, user_id: user.id, tagged_user_id: user2.id)
-
-      expect(user.id).to eq user_tag.user_id
-      expect(peep.id).to eq user_tag.peep_id
-    end
-
-    it 'returns filtered peeps in reverse chronological order' do
-
-      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-      user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-      user_tag = TagUser.create(peep_id: peep.id, user_id: user.id, tagged_user_id: user2.id)
+      user2 = User.create(username: 'tagger', email: 'tagger@testmail.com', password: 'password123')
+      peep = Peep.create(body: 'this is a test peep')
       peep2 = Peep.create(body: 'this is a newer test peep')
-      user_tag = TagUser.create(peep_id: peep2.id, user_id: user.id, tagged_user_id: user2.id)
-      peeps = Peep.tagged_users(tagged_user_id: user2.id)
+      UserPeep.create(user_id: user.id, peep_id: peep.id)
+      UserPeep.create(user_id: user.id, peep_id: peep2.id)
+      TagUser.create(peep_id: peep.id, user_id: user2.id, tagged_user_id: user.id)
+      TagUser.create(peep_id: peep2.id, user_id: user2.id, tagged_user_id: user.id)
+      tagged_peep = Peep.tagged_users(tagged_user_id: user.id)
 
-      expect(peeps.first.body).to eq('this is a newer test peep')
+      expect(tagged_peep[0].last).to eq tagged_by: user2.username
+      expect(tagged_peep[0].first.id).to eq peep2.id
+      expect(tagged_peep[0].first.body).to eq peep2.body
     end
   end
 

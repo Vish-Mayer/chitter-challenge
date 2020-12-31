@@ -8,6 +8,7 @@ require 'sinatra/flash'
 
 require './lib/database_connection'
 require './lib/convert_date'
+require 'email'
 
 require 'user'
 require 'peep'
@@ -15,7 +16,7 @@ require 'hashtag'
 require 'user_peep'
 require 'hashtag_peep'
 require 'tag_user'
-require 'email'
+
 
 class Chitter < Sinatra::Base
 

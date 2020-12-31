@@ -1,6 +1,4 @@
 require 'user'
-require 'data_matcher'
-require 'bcrypt'
 
 describe User do
 

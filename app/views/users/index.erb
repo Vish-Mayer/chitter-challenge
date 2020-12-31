@@ -26,25 +26,28 @@ user page
 
     <h2>Peeps that I've been tagged in</h2>
     <% @user.tagged_peeps.each do |peep| %>
+
       <ul>
         <div class="peep">
           <div class="container">
+            <h3> Tagged by, <%= peep[1][:tagged_by] %> </h3>
             <!-- peep user -->
-            <% peep.user.each do |user| %>
+            <% peep[0].user.each do |user| %>
               <h4><%= user.username %></h4>
             <% end %>
             <!-- peep date -->
             <div class="created">
-              <%= peep.created_at %>
+              <%= peep[0].created_at %>
             </div>
             <!-- peep body -->
-          <p><%= peep.body %></p>
+          <p><%= peep[0].body %></p>
             <!-- peep hashtags -->
-          <% peep.hashtags.each do |tag| %>
-            <input type="submit" name="display_tag" value="<%= tag.content %>">
-          <% end %>
+            <% peep[0].hashtags.each do |tag| %>
+              <input type="submit" name="display_tag" value="<%= tag.content %>">
+            <% end %>
         </div>
       </ul>
+
     <% end %>
   <% else %>
   Sign in to use Chitter!

@@ -7,6 +7,10 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'features/web_helpers'
+require 'data_matcher'
+require 'pg'
+require 'bcrypt'
+
 require_relative './setup_test_database'
 
 Capybara.app = Chitter
