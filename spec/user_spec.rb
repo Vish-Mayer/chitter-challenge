@@ -38,6 +38,16 @@ describe User do
     end
   end
 
+  describe '.already_exists?' do
+
+    it 'returns true or false if a username or email exists' do
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user2 = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      exists = User.already_exists?(username: 'test_username', email: 'test@testmail.com')
+      expect(exists).to eq true
+    end
+  end
+
   describe '.find' do
     it 'it finds the user on the given id' do
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')

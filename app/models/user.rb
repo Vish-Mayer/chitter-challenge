@@ -59,6 +59,14 @@ class User
     User.new(id: result[0]['id'], username: result[0]['username'], email: result[0]['email'])
   end
 
+  def self.already_exists?(username:, email:)
+    username = DatabaseConnection.query("SELECT id FROM users WHERE username='#{username}'")
+    email = DatabaseConnection.query("SELECT id FROM users WHERE email='#{email}'")
+    return true if email.any? || username.any?
+
+    false
+  end
+
   attr_reader :id, :email, :username
 
   def initialize(id:, email:, username:)
