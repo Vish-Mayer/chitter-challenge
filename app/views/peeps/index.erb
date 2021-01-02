@@ -1,65 +1,105 @@
-<link type="text/css" rel="stylesheet" href="css/peeps_index.css">
 
-<% if @user %>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-<div class="sign-out-btn">
-  <form action="/sessions/destroy" method="post">
-    <input type="submit" name="sign_out" value="Sign out" />
-  </form>
-</div>
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="SitePoint">
 
-  <h2>Signed in as, <a href="user_page"><%= @user.username %></a></<h2>
+  <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
+  <link type="text/css" rel="stylesheet" href="css/peep-styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+  <body>
+
+    <nav>
+      <div class="logo">
+          <h4>Chitter</h4>
+      </div>
+      <ul class="nav-links">
+          <li><a href="/peeps">Home</a></li>
+          <li><a href="/user_page">Explore</a></li>
+          <li>
+            <form action="/sessions/destroy" method="post">
+              <input class="btn" type="submit" name="sign_out" value="Sign out" />
+            </form>
+          </li>
+      </ul>
+      <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+      </div>
+    </nav>
+
+    <% if @user %>
+
+      <div class='welcome-msg'>
+        <h2>Signed in as, <a href="user_page"><%= @user.username %></a></<h2>
+      </div>
 
 
-  <div class="form">
-    <form class="" action="peep/new" method="post">
-      <input type="text" name="text_area" placeholder=""="Enter Peep">
-      <input type="submit" name="submit" value="Peep">
-    </form>
-  </div>
-
-  <% else %>
-  <h3>Sign in to use Chitter!</h3>
-<% end %>
-
-<h3><%= flash[:notice] %></h3>
-
-<% @peeps.each do |peep| %>
-  <ul>
-    <div class="peep">
-      <div class="container">
-        <!-- peep user -->
-        <% peep.user.each do |user| %>
-          <h4><%= user.username %></h4>
-        <% end %>
-        <!-- peep date -->
-        <div class="created">
-          <%= peep.created_at %>
-        </div>
-        <!-- peep body -->
-      <p><%= peep.body %></p>
-        <!-- peep hashtags -->
-      <% peep.hashtags.each do |tag| %>
-        <form class="" action="peeps/hashtags/<%= tag.id %>" method="get">
-           <input class="hashtag" type="submit" name="display_tag" value="<%= tag.content %>">
+      <div class="form">
+        <form class="" action="peep/new" method="post">
+          <input type="text" name="text_area" id="peep" size="50" height="50">
+          <input class="btn" type="submit" name="submit" value="Peep">
         </form>
-      <% end %>
-      <!-- tagging a user -->
-      <% if @user %>
+      </div>
 
-        <form class="" action="/peeps/<%= peep.id %>/tag_user" method="post">
-          <div class="custom_select"  style="width:200px;">
-            <select name="select_user">
-              <option value="0">Tag a user:</option>
-              <% @users.each do |user| %>
-              <option value="<%= user.id %>"> <%= user.username %> </option>
-              <% end %>
-            </select>
-          </div>
-          <input type="submit" name="tag_user" value="Tag">
-        </form>
-
-      <% end %>
+      <div class="notice">
+      <% else %>
+      <h3>Sign in to use Chitter!</h3>
+    <% end %>
     </div>
-  </ul>
-<% end %>
+
+    <h3><%= flash[:notice] %></h3>
+
+    <% @peeps.each do |peep| %>
+      <ul>
+        <div class="peep container">
+          <div class="square">
+            <!-- peep user -->
+            <% peep.user.each do |user| %>
+              <div class="h1"><h4><%= user.username %></h4></div>
+            <% end %>
+            <!-- peep date -->
+            <div class="created">
+              <%= peep.created_at %>
+            </div>
+            <!-- peep body -->
+          <p><%= peep.body %></p>
+            <!-- peep hashtags -->
+          <% peep.hashtags.each do |tag| %>
+            <div class="hashtags">
+              <form class="" action="peeps/hashtags/<%= tag.id %>" method="get">
+                 <input class="hashtag" type="submit" name="display_tag" value="<%= tag.content %>">
+              </form>
+            </div>
+          <% end %>
+          <!-- tagging a user -->
+          <% if @user %>
+
+            <div class="tag-user">
+              <form action="/peeps/<%= peep.id %>/tag_user" method="post">
+                <div class="custom_select"  style="width:200px;">
+                  <select name="select_user">
+                    <option value="0">Tag a user:</option>
+                    <% @users.each do |user| %>
+                    <option value="<%= user.id %>"> <%= user.username %> </option>
+                    <% end %>
+                  </select>
+                </div>
+                <input type="submit" name="tag_user" value="Tag">
+              </form>
+            </div>
+
+          <% end %>
+        </div>
+      </ul>
+    <% end %>
+    <script src="scripts/navbar.js" charset="utf-8"></script>
+  </body>
+</html>

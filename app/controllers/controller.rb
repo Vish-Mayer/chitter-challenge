@@ -27,12 +27,12 @@ class Chitter < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
 
-  get('/') do
-    erb :index
+  get('/test_stuff') do
+    erb :test_stuff
   end
 
-  get('/users/new') do
-    erb :'users/new'
+  get('/') do
+    erb :index
   end
 
   get('/peeps') do
@@ -74,6 +74,10 @@ class Chitter < Sinatra::Base
   get('/user_page') do
     @user = User.find(id: session[:user_id])
     erb :'users/index'
+  end
+
+  get('/users/new') do
+    erb :'users/new'
   end
 
   post('/chitter/users') do
