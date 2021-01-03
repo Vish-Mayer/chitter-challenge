@@ -8,7 +8,7 @@
 
   <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
   <link type="text/css" rel="stylesheet" href="css/peep-styles.css">
-    <link type="text/css" rel="stylesheet" href="css/mention.css">
+  <link type="text/css" rel="stylesheet" href="css/mention.css">
   <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
 
   <script type="text/javascript">
@@ -51,7 +51,9 @@
 
       <div class="form">
         <form class="" action="peep/new" method="post">
-          <input type="text" name="text_area" id="textarea" size="50" placeholder="@mention a user in your peep!" autocomplete="off">
+          <!-- <input type="text" name="text_area" id="textarea" size="50" placeholder="@mention a user in your peep!" autocomplete="off"> -->
+           <textarea name="text_area" id="textarea" placeholder="mention a @user in your peep!" autocomplete="off"></textarea>
+
           <div id="menu" class="menu" role="listbox"></div>
           <input class="btn" type="submit" name="submit" value="Peep">
         </form>

@@ -1,14 +1,71 @@
-<h2>
- <%= flash[:notice] %>
-</h2>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
 
-<form action="/sessions" method="post">
-  <input type="text" name="email" placeholder="Email">
-  <input type="text" name="password"placeholder="Password" />
-  <input type="submit" name="submit" value="Sign In" />
-</form>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="SitePoint">
 
-Don't have an account?
-<form class="" action="users/new" method="get">
-  <input type="submit" name="sign_up" value="Sign Up">
-</form>
+    <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
+    <link type="text/css" rel="stylesheet" href="css/sign-up-form.css">
+    <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+
+  <body>
+
+    <nav>
+      <div class="logo">
+          <h4>Chitter</h4>
+      </div>
+      <ul class="nav-links">
+          <li>
+        
+          </li>
+      </ul>
+      <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+      </div>
+    </nav>
+
+
+    <h2>
+     <%= flash[:notice] %>
+    </h2>
+
+    <!-- <div class="sign_in_form">
+      <form action="/sessions" method="post">
+        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="password"placeholder="Password" />
+        <input type="submit" name="submit" value="Sign In" />
+      </form>
+
+      Don't have an account?
+      <form class="" action="users/new" method="get">
+        <input type="submit" name="sign_up" value="Sign Up">
+      </form>
+    </div> -->
+
+    <div class="container">
+      <form action="/sessions" method="post">
+        <label for="email">Email</label>
+        <input type="text" name="email" size="50" placeholder="Email">
+
+        <label for="password">Password</label>
+        <input type="text" name="password"placeholder="Password" />
+
+          <input type="submit" name="submit" value="Sign In" />
+      </form>
+      Don't have an account?
+        <form class="" action="users/new" method="get">
+          <input type="submit" name="sign_up" value="Sign Up">
+        </form>
+    </div>
+
+
+
+    <script src="scripts/navbar.js" charset="utf-8"></script>
+  </body>
+</html>
