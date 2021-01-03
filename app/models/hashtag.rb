@@ -16,18 +16,6 @@ class HashTag
     }
   end
 
-  def self.allUsernames
-    hashtags = []
-    result = DatabaseConnection.query('
-      SELECT *
-      FROM hashtags
-      Order by id DESC
-    ')
-    result.map { |hashtag| hashtags << hashtag['content']}
-    hashtags
-
-  end
-
   def self.create(hashtag:)
     result = DatabaseConnection.query("
       SELECT *

@@ -40,15 +40,6 @@ describe HashTag do
     end
   end
 
-  describe '.allUsernames' do
-    it 'it finds the hashtag on the given peep id' do
-      hashtag1 = HashTag.create(hashtag: "#hashtag")
-      hashtag2 = HashTag.create(hashtag: "#hashtag2")
-
-      HashTag.allUsernames
-    end
-  end
-
   describe '#peeps' do
     it 'calls .where on the user class' do
       expect(peep_class).to receive(:where).with(hashtag_id: hashtag.id)
