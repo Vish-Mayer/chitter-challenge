@@ -78,6 +78,12 @@ class User
     false
   end
 
+  def self.scan(body:)
+    result = body.to_enum(:scan, /(?:\s|^)(?:@(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i ).map { Regexp.last_match }
+    result.join.split(" ").map { |user| user.delete('@') }
+  end
+
+
   attr_reader :id, :email, :username
 
   def initialize(id:, email:, username:)

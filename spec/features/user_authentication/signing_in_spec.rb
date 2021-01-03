@@ -21,7 +21,7 @@ feature 'user sign in' do
     fill_in 'password', with: 'password123'
     click_button('Sign In')
 
-    expect(page).not_to have_content('Welcome test@testmail.com!')
+    expect(page).not_to have_content('Welcome test_username!')
     expect(page).to have_content('Please check your email or password.')
   end
 

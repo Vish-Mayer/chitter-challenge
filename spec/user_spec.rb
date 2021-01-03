@@ -79,6 +79,20 @@ describe User do
     end
   end
 
+  describe '.scan' do
+
+    it 'scans through the given string to identify a username using the @ symbol' do
+      users = []
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user = User.create(username: 'test_username2', email: 'test@testmail2.com', password: 'password123')
+      scan = User.scan(body: "Im tagging @test_username and @test_username2")
+      scan.map { |user| users << user }
+
+      expect(users).to eq ["test_username", "test_username2"]
+
+    end
+  end
+
   describe '#peeps' do
     it 'calls .users on the peep class' do
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')

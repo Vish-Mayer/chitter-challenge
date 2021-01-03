@@ -16,7 +16,7 @@ require 'hashtag'
 require 'user_peep'
 require 'hashtag_peep'
 require 'tag_user'
-
+require 'mention_user'
 
 class Chitter < Sinatra::Base
 
@@ -40,12 +40,21 @@ class Chitter < Sinatra::Base
   end
 
   post('/peep/new') do
+
     hashtags = HashTag.scan(body: params[:text_area])
+    mentioned_users = User.scan(body: params[:text_area])
     peep = Peep.create(body: params[:text_area])
+
+    UserPeep.create(user_id: session[:user_id], peep_id: peep.id)
+
     hashtags.map { |hashtag|
       HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
     }
-    UserPeep.create(user_id: session[:user_id], peep_id: peep.id)
+
+    mentioned_users.map { |mentioned_user|
+      MentionUser.create(peep_id: peep.id, user_id: session[:user_id], mentioned_user: mentioned_user)
+    }
+
     redirect('/peeps')
   end
 
