@@ -219,11 +219,6 @@ class Mentionify {
   }
 }
 
-const users = [
-  { username: 'john_doe' },
-  { username: 'jane_doe' },
-]
-
 const resolveFn = prefix => prefix === ''
   ? users
   : users.filter(user => user.username.startsWith(prefix))

@@ -70,6 +70,15 @@ describe User do
     end
   end
 
+  describe '.allUsernames' do
+    it 'it returns all the usernames as a json object' do
+      user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
+      user2 = User.create(username: 'test_username2', email: 'test@testmail2.com', password: 'password123')
+
+      expect(User.allUsernames).to eq [{username: user.username}, {username: user2.username}].to_json
+    end
+  end
+
   describe '#peeps' do
     it 'calls .users on the peep class' do
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')

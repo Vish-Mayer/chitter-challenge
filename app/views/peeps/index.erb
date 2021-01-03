@@ -11,6 +11,9 @@
     <link type="text/css" rel="stylesheet" href="css/mention.css">
   <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
 
+  <script type="text/javascript">
+    const users = <%= @usernames %>
+  </script>>
 
 </head>
 
@@ -45,6 +48,8 @@
       <div class='welcome-msg'>
         <h2>Signed in as, <a href="user_page"><%= @user.username %></a></<h2>
       </div>
+
+      <%= @usernames %>
 
 
       <div class="form">

@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'json'
 
 class User
 
@@ -10,6 +11,16 @@ class User
     result.map { |user|
       User.new(id: user['id'], username: user['username'], email: user['email'])
     }
+  end
+
+  def self.allUsernames
+    usernames = []
+    result = DatabaseConnection.query('
+      SELECT username
+      FROM users
+      ')
+    result.map { |user| usernames << { username: user['username'] }}
+    usernames.to_json
   end
 
   def self.create(username:, email:, password:)
