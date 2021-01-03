@@ -8,8 +8,9 @@
 
   <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
   <link type="text/css" rel="stylesheet" href="css/peep-styles.css">
+    <link type="text/css" rel="stylesheet" href="css/mention.css">
   <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 </head>
 
@@ -23,9 +24,13 @@
           <li><a href="/peeps">Home</a></li>
           <li><a href="/user_page">Explore</a></li>
           <li>
-            <form action="/sessions/destroy" method="post">
-              <input class="btn" type="submit" name="sign_out" value="Sign out" />
-            </form>
+            <% if @user %>
+              <form action="/sessions/destroy" method="post">
+                <input class="btn" type="submit" name="sign_out" value="Sign out" />
+              </form>
+            <% else %>
+              <a href="/">Sign in</a>
+            <% end %>
           </li>
       </ul>
       <div class="burger">
@@ -44,14 +49,15 @@
 
       <div class="form">
         <form class="" action="peep/new" method="post">
-          <input type="text" name="text_area" id="peep" size="50" height="50">
+          <input type="text" name="text_area" id="textarea" size="50" autocomplete="off">
+          <div id="menu" class="menu" role="listbox"></div>
           <input class="btn" type="submit" name="submit" value="Peep">
         </form>
       </div>
 
       <div class="notice">
       <% else %>
-      <h3>Sign in to use Chitter!</h3>
+      <h3 class="welcome-msg">Sign in to use Chitter!</h3>
     <% end %>
     </div>
 
@@ -63,7 +69,10 @@
           <div class="square">
             <!-- peep user -->
             <% peep.user.each do |user| %>
-              <div class="h1"><h4><%= user.username %></h4></div>
+            <div class="peep-username">
+              <img class="profile-pic" src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" style="" alt="">
+                <div class="h1"><h4><%= user.username %></h4></div>
+            </div>
             <% end %>
             <!-- peep date -->
             <div class="created">
@@ -92,7 +101,7 @@
                     <% end %>
                   </select>
                 </div>
-                <input type="submit" name="tag_user" value="Tag">
+                <a><input type="submit" name="tag_user" value="Tag"></a>
               </form>
             </div>
 
@@ -101,5 +110,6 @@
       </ul>
     <% end %>
     <script src="scripts/navbar.js" charset="utf-8"></script>
+    <script src="scripts/mention.js" charset="utf-8"></script>
   </body>
 </html>

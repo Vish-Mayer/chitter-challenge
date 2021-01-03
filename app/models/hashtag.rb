@@ -5,6 +5,29 @@ class HashTag
     result.join.split(" ").map { |hashtag| HashTag.create(hashtag: hashtag) }
   end
 
+  def self.all
+    result = DatabaseConnection.query('
+      SELECT *
+      FROM hashtags
+      Order by id DESC
+    ')
+    result.map { |hashtag|
+      HashTag.new(id: hashtag['id'], content: hashtag['content'])
+    }
+  end
+
+  def self.allUsernames
+    hashtags = []
+    result = DatabaseConnection.query('
+      SELECT *
+      FROM hashtags
+      Order by id DESC
+    ')
+    result.map { |hashtag| hashtags << hashtag['content']}
+    hashtags
+
+  end
+
   def self.create(hashtag:)
     result = DatabaseConnection.query("
       SELECT *

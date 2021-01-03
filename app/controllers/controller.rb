@@ -27,10 +27,6 @@ class Chitter < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
 
-  get('/test_stuff') do
-    erb :test_stuff
-  end
-
   get('/') do
     erb :index
   end
@@ -39,6 +35,7 @@ class Chitter < Sinatra::Base
     @user = User.find(id: session[:user_id])
     @users = User.all
     @peeps = Peep.all
+    @hashtags = HashTag.allUsernames
     erb :'peeps/index'
   end
 

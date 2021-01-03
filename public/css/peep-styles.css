@@ -19,7 +19,7 @@ body {
   width: 700px;
 	height: auto;
 	background: white;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0px 20px 50px #D9DBDF;
 }
 
@@ -31,26 +31,41 @@ body {
 .h1{
 
   text-align: left;
-
-  padding-left: 30px;
-  padding-top: 10px;
-
-
+  padding-left: 5px;
+  padding-top: 35px;
   font-family: 'Merriweather', serif;
   font-size: 24px;
 }
 p{
- text-align: justify;
- padding-left: 30px;
  padding-right: 30px;
+ padding-left: 30px;
  font-family: 'Open Sans', sans-serif;
  font-size: 20px;
  line-height: 100px;
 }
 
+.peep-username {
+display: flex;
+}
+
+.profile-pic{
+  width: 100px;
+  border: 3px solid #555;
+  display: flex;
+  border-radius: 50%;
+}
+
+
 .hashtags {
   padding-left: 30px;
   padding-right: 30px;
+}
+
+.hashtags .hashtag{
+  border: none;
+  font-size: 15px;
+  color: #442d7d;
+  font-style: italic;
 }
 
 .created {
