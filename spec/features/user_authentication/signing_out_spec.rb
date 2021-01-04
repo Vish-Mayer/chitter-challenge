@@ -6,7 +6,7 @@ feature 'user sign out' do
     User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
   end
 
-  scenario 'user can sign in with the correct account details' do
+  scenario 'user can end the session by clicking "Sign out"'do
 
     sign_in
 

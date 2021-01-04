@@ -50,15 +50,15 @@ class Chitter < Sinatra::Base
     hashtags.map { |hashtag|
       HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
     }
-
     mentioned_users.map { |mentioned_user|
       MentionUser.create(peep_id: peep.id, user_id: session[:user_id], mentioned_user: mentioned_user)
     }
-
     redirect('/peeps')
   end
 
   get('/peeps/hashtags/:id') do
+    @user = User.find(id: session[:user_id])
+    @users = User.all
     @hashtag = HashTag.find(id: params[:id])
     @tag_name = params[:display_tag]
     erb :'hashtags/filter'
@@ -70,7 +70,7 @@ class Chitter < Sinatra::Base
       TagUser.create(peep_id: params[:id], user_id: session[:user_id], tagged_user_id: params[:select_user])
       tagged_user = User.find(id: params[:select_user])
       user = User.find(id: session[:user_id])
-      Email.send(tagged_user: tagged_user.email, user: user.username)
+      Email.send(tagged_user: tagged_user.email, user: user.username, verb_type: 'tagged')
     else
       flash[:notice] = 'Select a user to tag'
     end
@@ -79,6 +79,7 @@ class Chitter < Sinatra::Base
 
   get('/user_page') do
     @user = User.find(id: session[:user_id])
+    @users = User.all
     erb :'users/index'
   end
 

@@ -1,10 +1,57 @@
-<h2>
- <%= flash[:notice] %>
-</h2>
 
-<form action="/chitter/users" method="post">
-  <input type="text" name="username" placeholder="User name">
-  <input type="text" name="email" placeholder="Email">
-  <input type="text" name="password" placeholder="Password">
-  <input type="submit" name="submit" value="Confirm">
-</form>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="SitePoint">
+
+  <link type="text/css" rel="stylesheet" href="/css/nav-styles.css">
+  <link type="text/css" rel="stylesheet" href="/css/sign-up-form.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
+
+</head>
+
+  <body>
+
+    <nav>
+      <div class="logo">
+          <h4>Chitter</h4>
+      </div>
+      <ul class="nav-links">
+
+      </ul>
+      <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+      </div>
+    </nav>
+
+    <h2>
+     <%= flash[:notice] %>
+    </h2>
+
+    <div class="container">
+      <form action="/chitter/users" method="post">
+        <label for="username">Username</label>
+        <input type="text" name="username" size="50" placeholder="Username">
+
+        <label for="email">Email</label>
+        <input type="text" name="email" size="50" placeholder="Email">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password"/>
+
+          <input type="submit" name="submit" value="Sign Up" />
+      </form>
+      Already have an account?
+        <form class="" action="/" method="get">
+          <input type="submit" name="sign_in" value="Sign In">
+        </form>
+    </div>
+
+    <script src="/scripts/navbar.js" charset="utf-8"></script>
+  </body>
+</html>
