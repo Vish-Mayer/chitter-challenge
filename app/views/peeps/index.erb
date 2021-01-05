@@ -97,7 +97,7 @@
 
             <div class="tag-user">
               <form action="/peeps/<%= peep.id %>/tag_user" method="post">
-                <div class="custom_select"  style="width:200px;">
+                <div class="custom_select select-dropdown"  style="width:150px;">
                   <select name="select_user">
                     <option value="0">Tag a user:</option>
                     <% @users.each do |user| %>
@@ -105,15 +105,30 @@
                     <% end %>
                   </select>
                 </div>
-                <a><input type="submit" name="tag_user" value="Tag"></a>
+                <a><input class="btn" type="submit" name="tag_user" value="Tag"></a>
               </form>
             </div>
-
           <% end %>
+
+          <div class="comment more">
+          	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          	Vestibulum laoreet, nunc eget laoreet sagittis,
+          	quam ligula sodales orci, congue imperdiet eros tortor ac lectus.
+          	Duis eget nisl orci. Aliquam mattis purus non mauris
+          	blandit id luctus felis convallis.
+          	Integer varius egestas vestibulum.
+          	Nullam a dolor arcu, ac tempor elit. Donec.
+          </div>
+
         </div>
       </ul>
+
+      </div>
+
     <% end %>
-    <script src="scripts/navbar.js" charset="utf-8"></script>
-    <script src="scripts/mention.js" charset="utf-8"></script>
+    <script src="js/navbar.js" charset="utf-8"></script>
+    <script src="js/mention.js" charset="utf-8"></script>
+    <script src="js/jquery.js" charset="utf-8"></script>
+    <script src="js/showmore.js" charset="utf-8"></script>
   </body>
 </html>
