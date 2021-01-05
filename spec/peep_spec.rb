@@ -81,23 +81,28 @@ describe Peep do
     end
   end
 
-  describe '.tagged_users' do
+  describe '.user_activity' do
 
-    it 'it finds a tagged peep with a given tagged_user id - returns in reverse chronological order' do
+    it 'it finds peeps that have been mentioned or commented on by the recipient user id in reverse order' do
 
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
       user2 = User.create(username: 'tagger', email: 'tagger@testmail.com', password: 'password123')
       peep = Peep.create(body: 'this is a test peep')
-      peep2 = Peep.create(body: 'this is a newer test peep')
+      peep2 = Peep.create(body: 'this is a newer test peep @test_username')
       UserPeep.create(user_id: user.id, peep_id: peep.id)
       UserPeep.create(user_id: user.id, peep_id: peep2.id)
-      TagUser.create(peep_id: peep.id, user_id: user2.id, tagged_user_id: user.id)
-      TagUser.create(peep_id: peep2.id, user_id: user2.id, tagged_user_id: user.id)
-      tagged_peep = Peep.tagged_users(tagged_user_id: user.id)
+      UserActivity.create(type: 'tagged', peep_id: peep.id, user_1_id: user2.id, user_2_id: user.id)
+      UserActivity.create(type: 'mentioned', peep_id: peep2.id, user_1_id: user2.id, user_2_id: user.id)
+      user_activity = Peep.user_activity(recipient_id: user.id)
 
-      expect(tagged_peep[0].last).to eq tagged_by: user2.username
-      expect(tagged_peep[0].first.id).to eq peep2.id
-      expect(tagged_peep[0].first.body).to eq peep2.body
+      expect(user_activity[0].last).to eq type: 'mentioned', username: user2.username
+      expect(user_activity[0].first.id).to eq peep2.id
+      expect(user_activity[0].first.body).to eq peep2.body
+
+      expect(user_activity[1].last).to eq type: 'tagged', username: user2.username
+      expect(user_activity[1].first.id).to eq peep.id
+      expect(user_activity[1].first.body).to eq peep.body
+
     end
   end
 

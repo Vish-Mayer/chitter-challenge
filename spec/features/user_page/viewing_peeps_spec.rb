@@ -24,13 +24,13 @@ feature 'viewing own peeps' do
 
     user2 = User.create(username: 'tagger', email: 'tagger@testmail.com', password: 'password123')
     UserPeep.create(user_id: user2.id, peep_id: @peep2.id)
-    TagUser.create(peep_id: @peep.id, user_id: user2.id, tagged_user_id: @user.id)
+    UserActivity.create(type: 'tagged', peep_id: @peep.id, user_1_id: user2.id, user_2_id: @user.id)
     sign_in
     visit('/peeps')
     click_link('test_username')
 
     expect(current_path).to eq('/user_page')
-    expect(page).to have_content "Tagged by, tagger"
+    expect(page).to have_content "tagger tagged you in a peep"
     expect(page).to have_content 'this is a test peep'
     expect(page).not_to have_content 'this is another test peep'
   end

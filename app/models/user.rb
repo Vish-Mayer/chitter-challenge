@@ -83,7 +83,6 @@ class User
     result.join.split(" ").map { |user| user.delete('@') }
   end
 
-
   attr_reader :id, :email, :username
 
   def initialize(id:, email:, username:)
@@ -98,5 +97,13 @@ class User
 
   def tagged_peeps(peep_class = Peep)
     peep_class.tagged_users(tagged_user_id: id)
+  end
+
+  def mentioned_peeps(peep_class = Peep)
+    peep_class.mentioned_users(mentioned_user_id: id)
+  end
+
+  def activity(peep_class = Peep)
+    peep_class.user_activity(recipient_id: id)
   end
 end

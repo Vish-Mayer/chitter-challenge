@@ -16,9 +16,9 @@ feature 'creating hashtags' do
     first('.peep').click_button('#hashtag')
 
     hashtag_id = data_matcher('id', 'hashtags')
-    content = data_matcher('content', 'hashtags')
     expect(current_path).to eq("/peeps/hashtags/#{hashtag_id[0]}")
 
-    expect(page).to have_content('this is a test #hashtag')
+    expect(page).to have_content 'Filtered by #hashtag'
+    expect(first('.peep')).to have_content 'this is a test #hashtag'
   end
 end

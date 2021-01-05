@@ -34,8 +34,56 @@
       </div>
     </nav>
 
+
     <% if @user %>
-      <h2 class="welcome-msg"> <%= @user.username %>'s wall </h2>
+    <h2 class="welcome-msg"> <%= @user.username %>'s recent activity </h2>
+    <% @user.activity.each do |peep| %>
+
+      <ul class="peep-body">
+        <h3 class="mentioned_by"> <%= peep[1][:username] %> <%= peep[1][:type] %> you in a peep! </h3>
+        <div class="container">
+          <div class="square">
+
+            <!-- peep user -->
+            <% peep[0].user.each do |user| %>
+              <div class="peep-username">
+                <img class="profile-pic" src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" style="" alt="">
+                  <div class="h1"><h4><%= user.username %></h4></div>
+              </div>
+            <% end %>
+            <!-- peep date -->
+            <div class="created">
+              <%= peep[0].created_at %>
+            </div>
+            <!-- peep body -->
+          <p><%= peep[0].body %></p>
+            <!-- peep hashtags -->
+            <% peep[0].hashtags.each do |tag| %>
+              <div class="hashtags">
+                <form class="" action="peeps/hashtags/<%= tag.id %>" method="get">
+                   <input class="hashtag" type="submit" name="display_tag" value="<%= tag.content %>">
+                </form>
+              </div>
+            <% end %>
+
+            <div class="tag-user">
+              <form action="/peeps/<%= peep[0].id %>/tag_user" method="post">
+                <div class="custom_select"  style="width:200px;">
+                  <select name="select_user">
+                    <option value="0">Tag a user:</option>
+                    <% @users.each do |user| %>
+                    <option value="<%= user.id %>"> <%= user.username %> </option>
+                    <% end %>
+                  </select>
+                </div>
+                <a><input type="submit" name="tag_user" value="Tag"></a>
+              </form>
+            </div>
+
+        </div>
+      </ul>
+      <% end %>
+
         <% @user.peeps.each do |peep| %>
           <ul>
             <div class="container">
@@ -77,50 +125,6 @@
 
             </div>
           </ul>
-        <% end %>
-
-        <h2>Peeps that I've been tagged in</h2>
-        <% @user.tagged_peeps.each do |peep| %>
-
-          <ul>
-            <div class="container">
-              <div class="square">
-                <h3> Tagged by, <%= peep[1][:tagged_by] %> </h3>
-                <!-- peep user -->
-                <% peep[0].user.each do |user| %>
-                  <div class="peep-username">
-                    <img class="profile-pic" src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" style="" alt="">
-                      <div class="h1"><h4><%= user.username %></h4></div>
-                  </div>
-                <% end %>
-                <!-- peep date -->
-                <div class="created">
-                  <%= peep[0].created_at %>
-                </div>
-                <!-- peep body -->
-              <p><%= peep[0].body %></p>
-                <!-- peep hashtags -->
-                <% peep[0].hashtags.each do |tag| %>
-                  <input class="hashtags" type="submit" name="display_tag" value="<%= tag.content %>">
-                <% end %>
-
-                <div class="tag-user">
-                  <form action="/peeps/<%= peep[0].id %>/tag_user" method="post">
-                    <div class="custom_select"  style="width:200px;">
-                      <select name="select_user">
-                        <option value="0">Tag a user:</option>
-                        <% @users.each do |user| %>
-                        <option value="<%= user.id %>"> <%= user.username %> </option>
-                        <% end %>
-                      </select>
-                    </div>
-                    <a><input type="submit" name="tag_user" value="Tag"></a>
-                  </form>
-                </div>
-
-            </div>
-          </ul>
-
         <% end %>
       <% else %>
       Sign in to use Chitter!

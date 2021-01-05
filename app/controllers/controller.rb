@@ -15,8 +15,7 @@ require 'peep'
 require 'hashtag'
 require 'user_peep'
 require 'hashtag_peep'
-require 'tag_user'
-require 'mention_user'
+require 'user_activity'
 
 class Chitter < Sinatra::Base
 
@@ -51,7 +50,8 @@ class Chitter < Sinatra::Base
       HashTagPeep.create(hashtag_id: hashtag.id, peep_id: peep.id)
     }
     mentioned_users.map { |mentioned_user|
-      MentionUser.create(peep_id: peep.id, user_id: session[:user_id], mentioned_user: mentioned_user)
+      mentioned_user_id = DatabaseConnection.query("SELECT id FROM users WHERE username = '#{mentioned_user}'")
+      UserActivity.create(type: 'mentioned', peep_id: peep.id, user_1_id: session[:user_id], user_2_id: mentioned_user_id[0]['id'])
     }
     redirect('/peeps')
   end
@@ -67,7 +67,7 @@ class Chitter < Sinatra::Base
   post('/peeps/:id/tag_user') do
 
     if params[:select_user] != "0"
-      TagUser.create(peep_id: params[:id], user_id: session[:user_id], tagged_user_id: params[:select_user])
+      UserActivity.create(type: 'tagged', peep_id: params[:id], user_1_id: session[:user_id], user_2_id: params[:select_user])
       tagged_user = User.find(id: params[:select_user])
       user = User.find(id: session[:user_id])
       Email.send(tagged_user: tagged_user.email, user: user.username, verb_type: 'tagged')

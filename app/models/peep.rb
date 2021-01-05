@@ -51,26 +51,20 @@ class Peep
     result.map { |peep| Peep.new(id: peep['peep_id'], body: peep['body'], date: peep['date']) }
   end
 
-  def self.tagged_users(tagged_user_id:)
+  def self.user_activity(recipient_id:)
     search = DatabaseConnection.query("
-      SELECT P.id peep_id, U.username author, body, date, US.username tagger
-      FROM tag_user AS TU
+      SELECT peep_id, body, date, type, U1.username as username
+      FROM user_activity as UA
+      INNER JOIN peeps as P
+      on UA.peep_id = P.id
       INNER JOIN
-      users as US
-      on TU.user_id = US.id
-      INNER JOIN peeps AS P
-      on TU.peep_id = P.id
-      INNER JOIN
-      user_peep as UP
-      on TU.peep_id = UP.peep_id
-      INNER JOIN
-      users as U
-      on UP.user_id = U.id
-      WHERE tagged_user_id = #{tagged_user_id}
-      Order by P.id DESC
+      users as U1
+      on UA.user_1_id = U1.id
+      WHERE UA.user_2_id = #{recipient_id}
+      Order by UA.id DESC
     ")
     result = search.map { |all| all }
-    result.map { |peep| [ Peep.new(id: peep['peep_id'], body: peep['body'], date: peep['date']), tagged_by: peep['tagger'] ]}
+    result.map { |peep| [ Peep.new(id: peep['peep_id'], body: peep['body'], date: peep['date']), type: peep['type'], username: peep['username'] ]}
   end
 
   attr_reader :id, :body, :date

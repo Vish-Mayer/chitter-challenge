@@ -8,6 +8,13 @@ font-family: 'Open Sans', sans-serif;
   justify-content: center;
   padding-top: 50px;
 }
+
+.mentioned_by{
+  display: flex;
+  justify-content: center;
+  padding: 10px
+}
+
 .container{
   display: flex;
   justify-content: center;

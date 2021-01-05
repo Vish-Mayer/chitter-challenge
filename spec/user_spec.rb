@@ -101,11 +101,11 @@ describe User do
     end
   end
 
-  describe '#tagged_peeps' do
-    it 'calls .user_tags on the peep class' do
+  describe '#activity' do
+    it 'calls .user_activity on the peep class' do
       user = User.create(username: 'test_username', email: 'test@testmail.com', password: 'password123')
-      expect(peep_class).to receive(:tagged_users).with(tagged_user_id: user.id)
-      user.tagged_peeps(peep_class)
+      expect(peep_class).to receive(:user_activity).with(recipient_id: user.id)
+      user.activity(peep_class)
     end
   end
 end
