@@ -7,9 +7,12 @@ describe Peep do
   let(:convert_date_class) { double(:convert_date_class) }
   subject(:peep) { Peep.create(body: 'this is a test peep') }
 
+  before :each do
+    peep
+  end
+
   describe '.all' do
     it 'returns all of the peeps' do
-      peep = Peep.create(body: 'this is a test peep')
       peeps = Peep.all
       expect(peeps.first.body).to eq('this is a test peep')
     end

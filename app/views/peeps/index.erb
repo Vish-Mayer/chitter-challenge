@@ -110,24 +110,33 @@
             </div>
           <% end %>
 
+
           <div class="comments">
+          <% if @user %>
             <form action="/peeps/<%= peep.id %>/new_comment" method="post">
               <input type="text"name="comment">
               <input type="submit" name="submit" value="Comment">
             </form>
 
-            <div class="comment more">
+          <% end %>
+
+            <div class="comment-link more ">
+              <div class="comment-square">
             	<% peep.comments.each do |comment| %>
-                <ul>
-                  <li>
+
                     <% comment.users.each do |user| %>
-                      <%= user.username %>
+                    <div class="comment-usercard">
+                      <img class="comment-profile-pic" src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" style="" alt="">
+                        <div class="h4"><h5><%= user.username %></h5></div>
+                    </div>
                     <% end %>
-                    <%= comment.text %>
-                  </li>
-                </ul>
+                    <p class="comment-text"><%= comment.text %></p>
+
               <% end %>
+              </div>
             </div>
+
+
           </div>
 
         </div>

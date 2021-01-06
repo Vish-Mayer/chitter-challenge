@@ -35,13 +35,13 @@ font-family: 'Open Sans', sans-serif;
 }
 
 .h1{
-
   text-align: left;
   padding-left: 5px;
   padding-top: 35px;
   font-size: 24px;
   color: #454545
 }
+
 p{
  padding-right: 30px;
  padding-left: 30px;
@@ -159,8 +159,47 @@ a.morelink {
 .morecontent span {
 	display: none;
 }
-.comment {
+.comment-link {
 	width: 650px;
   display: flex;
-  padding-top: 10px
+}
+
+.comment-profile-pic{
+  width: 50px;
+  height: 50px;
+  border: 3px solid #555;
+  display: relative;
+  border-radius: 50%;
+}
+
+.h4{
+  text-align: left;
+  padding-left: 5px;
+  padding-top: 15px;
+  font-size: 24px;
+  color: #454545
+}
+
+.comment-usercard {
+  display: flex;
+
+  padding-top: 5px
+}
+
+
+.comment-square{
+  width: 650px;
+	height: auto;
+	background: white;
+
+}
+
+.comment-text{
+ padding-right: 30px;
+ padding-left: 50px;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 15px;
+ line-height: 40px;
+ border-bottom: 1px solid lightgrey;
+ padding-bottom: 10px
 }
