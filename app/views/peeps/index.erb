@@ -120,6 +120,9 @@
             	<% peep.comments.each do |comment| %>
                 <ul>
                   <li>
+                    <% comment.users.each do |user| %>
+                      <%= user.username %>
+                    <% end %>
                     <%= comment.text %>
                   </li>
                 </ul>

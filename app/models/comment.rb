@@ -19,4 +19,8 @@ class Comment
     @text = text
     @peep_id = peep_id
   end
+
+  def users(user_class = User)
+    user_class.comments(comment_id: id)
+  end
 end

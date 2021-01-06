@@ -49,6 +49,7 @@ task development_tables: [:database] do
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE hashtags(id SERIAL PRIMARY KEY, content VARCHAR(60));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE comments(id SERIAL PRIMARY KEY, text VARCHAR(240), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE user_peep(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), peep_id INTEGER REFERENCES peeps (id));"]
+  sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE user_comment(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), comment_id INTEGER REFERENCES comments (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE hashtag_peep(id SERIAL PRIMARY KEY, hashtag_id INTEGER REFERENCES hashtags (id), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter --command="CREATE TABLE user_activity(id SERIAL PRIMARY KEY, type VARCHAR(60), peep_id INTEGER REFERENCES peeps (id), user_1_id INTEGER REFERENCES users (id), user_2_id INTEGER REFERENCES users (id));"]
 end
@@ -70,6 +71,7 @@ task test_tables: [:development_tables] do
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE hashtags(id SERIAL PRIMARY KEY, content VARCHAR(60));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE comments(id SERIAL PRIMARY KEY, text VARCHAR(240), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE user_peep(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), peep_id INTEGER REFERENCES peeps (id));"]
+  sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE user_comment(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), comment_id INTEGER REFERENCES comments (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE hashtag_peep(id SERIAL PRIMARY KEY, hashtag_id INTEGER REFERENCES hashtags (id), peep_id INTEGER REFERENCES peeps (id));"]
   sh %[psql -U #{ENV['USER']} -d chitter_test --command="CREATE TABLE user_activity(id SERIAL PRIMARY KEY, type VARCHAR(60), peep_id INTEGER REFERENCES peeps (id), user_1_id INTEGER REFERENCES users (id), user_2_id INTEGER REFERENCES users (id));"]
 end

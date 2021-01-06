@@ -21,7 +21,7 @@ feature 'viewing peeps' do
     expect(current_path).to eq '/peeps'
 
     fill_in 'text_area', with: 'this is a test peep'
-    click_button('submit')
+    click_button('Peep')
 
     expect(first('.peep')).to have_content 'this is a test peep'
     expect(first('.peep')).to have_content 'today'
