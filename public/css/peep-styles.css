@@ -57,7 +57,7 @@ display: flex;
 .profile-pic{
   width: 100px;
   border: 3px solid #555;
-  display: flex;
+  display: relative;
   border-radius: 50%;
 }
 
@@ -140,6 +140,11 @@ display: flex;
 
 /* show/hide comments */
 
+.comments{
+   padding-left: 30px;
+   padding-top: 20px;
+}
+
 a {
 	color: #0254EB
 }
@@ -150,11 +155,12 @@ a.morelink {
 	text-decoration:none;
 	outline: none;
 }
+
 .morecontent span {
 	display: none;
 }
 .comment {
-	width: 400px;
-	background-color: #f0f0f0;
-	margin: 10px;
+	width: 650px;
+  display: flex;
+  padding-top: 10px
 }

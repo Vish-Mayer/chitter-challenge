@@ -13,6 +13,7 @@ require 'email'
 require 'user'
 require 'peep'
 require 'hashtag'
+require 'comment'
 require 'user_peep'
 require 'hashtag_peep'
 require 'user_activity'
@@ -62,6 +63,11 @@ class Chitter < Sinatra::Base
     @hashtag = HashTag.find(id: params[:id])
     @tag_name = params[:display_tag]
     erb :'hashtags/filter'
+  end
+
+  post('/peeps/:id/new_comment') do
+    Comment.create(text: params[:comment], peep_id: params[:id])
+    redirect('/peeps')
   end
 
   post('/peeps/:id/tag_user') do

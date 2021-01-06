@@ -8,6 +8,6 @@ def setup_test_database
 
   # Clear the chitter tables
   connection.exec('
-    TRUNCATE users, peeps, user_peep, hashtags, hashtag_peep, user_activity;
+    TRUNCATE users, peeps, user_peep, hashtags, comments, hashtag_peep, user_activity;
     ')
 end
