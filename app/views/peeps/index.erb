@@ -8,6 +8,7 @@
 
   <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
   <link type="text/css" rel="stylesheet" href="css/peep-styles.css">
+  <link type="text/css" rel="stylesheet" href="css/comment-styles.css">
   <link type="text/css" rel="stylesheet" href="css/mention.css">
   <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
 
@@ -120,6 +121,12 @@
 
           <% end %>
 
+          <% if peep.comment_count == '0' %>
+
+          No Comments
+
+          <% else %>
+
             <div class="comment-link more ">
               <div class="comment-square">
             	<% peep.comments.each do |comment| %>
@@ -130,11 +137,16 @@
                         <div class="h4"><h5><%= user.username %></h5></div>
                     </div>
                     <% end %>
-                    <p class="comment-text"><%= comment.text %></p>
+
+                    <p class="comment-text"><%= comment.text %>
+                      <input id="button" type="button" value="Reply"><br>
+                    </p>
 
               <% end %>
               </div>
             </div>
+
+          <% end %>
 
 
           </div>

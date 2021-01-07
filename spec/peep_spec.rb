@@ -4,6 +4,7 @@ describe Peep do
 
   let(:user_class) { double(:user_class) }
   let(:hashtag_class) { double(:hashtag_class) }
+  let(:comment_class) { double(:comment_class) }
   let(:convert_date_class) { double(:convert_date_class) }
   subject(:peep) { Peep.create(body: 'this is a test peep') }
 
@@ -124,6 +125,22 @@ describe Peep do
       peep.user(hashtag_class)
     end
   end
+
+  describe '#comments' do
+  it 'calls .where on the comment class' do
+
+    expect(comment_class).to receive(:where).with(peep_id: peep.id)
+    peep.comments(comment_class)
+  end
+end
+
+describe '#comment_count' do
+  it 'calls .count on the comment class' do
+
+    expect(comment_class).to receive(:count).with(peep_id: peep.id)
+    peep.comment_count(comment_class)
+  end
+end
 
   describe '#created_at' do
 

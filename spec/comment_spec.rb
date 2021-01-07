@@ -26,4 +26,17 @@ describe Comment do
 
     end
   end
+
+  describe '.count' do
+    it 'returns the amount of comments made in a peep' do
+      peep = Peep.create(body: 'this is a test peep')
+      Comment.create(text: 'This is a test comment', peep_id: peep.id)
+      Comment.create(text: 'This is another test comment', peep_id: peep.id)
+
+      count = Comment.count(peep_id: peep.id)
+
+      expect(count).to eq '2'
+
+    end
+  end
 end

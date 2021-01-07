@@ -87,6 +87,10 @@ class Peep
     comment_class.where(peep_id: id)
   end
 
+  def comment_count(comment_class = Comment)
+    comment_class.count(peep_id: id)
+  end
+
   def created_at(convert_date_class = ConvertDate)
     convert_date_class.where(date: date)
   end

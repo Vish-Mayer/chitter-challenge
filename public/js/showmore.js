@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	var showChar = 1;
-	var ellipsestext = "...";
 	var moretext = "show comments";
 	var lesstext = "hide comments";
 	$('.more').each(function() {
@@ -11,11 +10,11 @@ $(document).ready(function() {
 			var c = content.substr(0, showChar);
 			var h = content.substr(showChar-1, content.length - showChar);
 
-			var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+			var html = c + '<span class="moreellipses">' + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
 
 			$(this).html(html);
 		}
-		
+
 	});
 
 	$(".morelink").click(function(){
@@ -30,4 +29,5 @@ $(document).ready(function() {
 		$(this).prev().toggle();
 		return false;
 	});
+
 });
