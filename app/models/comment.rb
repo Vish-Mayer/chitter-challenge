@@ -38,4 +38,8 @@ class Comment
   def users(user_class = User)
     user_class.comments(comment_id: id)
   end
+
+  def replies(reply_class = Reply)
+    reply_class.where(comment_id: id)
+  end
 end

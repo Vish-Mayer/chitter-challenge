@@ -138,9 +138,18 @@
                     </div>
                     <% end %>
 
-                    <p class="comment-text"><%= comment.text %>
-                      <input id="button" type="button" value="Reply"><br>
-                    </p>
+                    <form action="peeps/<%= comment.id %>/reply" method="post">
+                      <p class="comment-text"><%= comment.text %>
+                        <% if @user %>
+                          <input type="text" name="reply_text" value="">
+                          <input id="button" type="submit" value="Reply"><br>
+                        <% end %>
+                      </p>
+                    </form>
+
+                    <% comment.replies.each do |reply|%>
+                    <%= reply.text %>
+                    <% end %>
 
               <% end %>
               </div>

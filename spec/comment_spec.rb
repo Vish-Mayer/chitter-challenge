@@ -3,6 +3,8 @@ require 'comment'
 
 describe Comment do
 
+  let(:reply_class) { double(:reply_class) }
+
   describe '.create' do
     it 'creates a new comment' do
       peep = Peep.create(body: 'this is a test peep')
@@ -37,6 +39,15 @@ describe Comment do
 
       expect(count).to eq '2'
 
+    end
+  end
+
+  describe '#replies' do
+    it 'calls .count on the comment class' do
+      peep = Peep.create(body: 'this is a test peep')
+      comment = Comment.create(text: 'This is a test comment', peep_id: peep.id)
+      expect(reply_class).to receive(:where).with(comment_id: comment.id)
+      comment.replies(reply_class)
     end
   end
 end
