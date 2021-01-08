@@ -9,6 +9,7 @@
   <link type="text/css" rel="stylesheet" href="css/nav-styles.css">
   <link type="text/css" rel="stylesheet" href="css/peep-styles.css">
   <link type="text/css" rel="stylesheet" href="css/comment-styles.css">
+  <link type="text/css" rel="stylesheet" href="css/reply-styles.css">
   <link type="text/css" rel="stylesheet" href="css/mention.css">
   <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
 
@@ -147,15 +148,27 @@
                       </p>
                     </form>
 
-                    <% comment.replies.each do |reply|%>
+                    <div class="reply-body">
 
-                      <% reply.users.each do |user|%>
-                        <%= user.username %>
-                      <% end %>
+                      <div class="reply-link more ">
+                        <div class="reply-square">
+
+                          <% comment.replies.each do |reply|%>
+
+                            <% reply.users.each do |user|%>
+                              <div class="reply-usercard">
+                              <img class="reply-profile-pic" src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" style="" alt="">
+                              <div class="h4"><h5><%= user.username %></h5></div>
+                              </div>
+                            <% end %>
 
 
-                    <%= reply.text %>
-                    <% end %>
+                          <p class="reply-text"><%= reply.text %>
+                          <% end %>
+                        </div>
+                      </div>
+
+                    </div>
 
               <% end %>
               </div>

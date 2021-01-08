@@ -1,0 +1,41 @@
+.reply-body{
+	margin-left: 50px;
+}
+
+.reply-profile-pic{
+  width: 50px;
+  height: 50px;
+  border: 3px solid #555;
+  display: relative;
+  border-radius: 50%;
+}
+
+.h4{
+  text-align: left;
+  padding-left: 5px;
+  font-size: 24px;
+  color: #454545
+}
+
+.reply-usercard {
+  display: flex;
+  align-items: center;
+  padding-top: 5px
+}
+
+
+.reply-square{
+  width: 500px;
+	height: auto;
+	background: white;
+
+}
+
+.reply-text{
+ padding-right: 30px;
+ padding-left: 50px;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 15px;
+ line-height: 40px;
+ padding-bottom: 10px
+}
