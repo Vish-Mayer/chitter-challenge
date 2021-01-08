@@ -148,6 +148,12 @@
                     </form>
 
                     <% comment.replies.each do |reply|%>
+
+                      <% reply.users.each do |user|%>
+                        <%= user.username %>
+                      <% end %>
+
+
                     <%= reply.text %>
                     <% end %>
 

@@ -71,6 +71,19 @@ class User
     result.map { |user| User.new(id: user['user_id'], username: user['username'], email: user['email']) }
   end
 
+  def self.replies(reply_id:)
+    search = DatabaseConnection.query("
+      SELECT *
+      FROM user_reply as UR
+      INNER JOIN
+      users as US
+      on UR.user_id = US.id
+      WHERE reply_id = #{reply_id}
+    ")
+    result = search.map { |all| all }
+    result.map { |user| User.new(id: user['user_id'], username: user['username'], email: user['email']) }
+  end
+
 
   def self.authenticate(email:, password:)
     result = DatabaseConnection.query("

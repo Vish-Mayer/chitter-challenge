@@ -18,6 +18,7 @@ require 'reply'
 require 'user_peep'
 require 'hashtag_peep'
 require 'user_comment'
+require 'user_reply'
 require 'user_activity'
 
 class Chitter < Sinatra::Base
@@ -74,7 +75,8 @@ class Chitter < Sinatra::Base
   end
 
   post('/peeps/:comment_id/reply') do
-    Reply.create(text: params[:reply_text], comment_id: params[:comment_id])
+    reply = Reply.create(text: params[:reply_text], comment_id: params[:comment_id])
+    UserReply.create(user_id: session[:user_id], reply_id: reply.id)
     redirect('/peeps')
   end
 

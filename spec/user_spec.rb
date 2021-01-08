@@ -75,6 +75,21 @@ describe User do
       comment = Comment.create(text: 'test comment', peep_id: peep.id)
       UserComment.create(user_id: user.id, comment_id: comment.id)
       found_user = User.comments(comment_id: comment.id)
+
+      expect(found_user.first.id).to eq user.id
+      expect(found_user.first.username).to eq user.username
+      expect(found_user.first.email).to eq user.email
+    end
+  end
+
+  describe '.replies' do
+    it 'it returns a user via a reply id' do
+      peep = Peep.create(body: 'this is a test peep')
+      comment = Comment.create(text: 'test comment', peep_id: peep.id)
+      reply = Reply.create(text: 'test reply', comment_id: comment.id)
+      UserReply.create(user_id: user.id, reply_id: reply.id)
+
+      found_user = User.replies(reply_id: reply.id)
       expect(found_user.first.id).to eq user.id
       expect(found_user.first.username).to eq user.username
       expect(found_user.first.email).to eq user.email

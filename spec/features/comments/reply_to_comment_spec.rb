@@ -22,5 +22,6 @@ feature 'comments' do
     click_button('Reply')
 
     expect(first('.peep')).to have_content "Nice comment"
+    expect(first('.peep')).to have_content "test_username"
   end
 end
