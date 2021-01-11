@@ -56,6 +56,24 @@ ADVANCED
 As a Maker
 So that I can stay constantly tapped in to the shouty box of Chitter
 I want to receive an email if I am tagged in a Peep
+
+ADDED STORIES
+
+As a Maker
+So that I can stay let people know what Im peeping about, 
+I want to be able to add hashtags in a peep.
+
+As a Maker
+So that I can stay up to date on the latest news,
+I want to be able to filter through peeps by a given hashtag.
+
+As a Maker
+So that I can invlove other users, 
+I want to be able to mention a user in a peep.
+
+As a Maker
+So that I can get invloved in coversations, 
+I want to be able comment and reply in peeps.
 ```
 
 Technical Approach:
