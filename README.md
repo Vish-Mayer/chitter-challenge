@@ -1,11 +1,16 @@
 Chitter Challenge
 =================
 
-* Challenge time: rest of the day and weekend, until Monday 9am
-* Feel free to use Google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday morning
+Create multiple #hashtags in a peep!
+<img src="./images/Screenshot-1.png" width=600 a>
+Filter peeps by a #hashtag
+<img src="./images/Screenshot-2.png" width=600 a>
+Mention or tag a user in a peep!
+<img src="./images/Screenshot-3.png" width=600 a>
+View peeps that you've been mentioned or tagged in!
+<img src="./images/Screenshot-4.png" width=600 a>
+Post comments on peeps and start a conversation!
+<img src="./images/Screenshot-5.png" width=600 a>
 
 Challenge:
 -------

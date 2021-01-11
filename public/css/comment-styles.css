@@ -25,6 +25,11 @@
   padding-top: 5px
 }
 
+.replying_to{
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
 
 .comment-square{
   width: 650px;
