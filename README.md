@@ -1,15 +1,19 @@
 Chitter Challenge
 =================
 
-Create multiple #hashtags in a peep!
+**Create multiple #hashtags in a peep!**
 <img src="./images/Screenshot-1.png" width=600 a>
-Filter peeps by a #hashtag
+
+**Filter peeps by a #hashtag**
 <img src="./images/Screenshot-2.png" width=600 a>
-Mention or tag a user in a peep!
+
+**Mention or tag a user in a peep!**
 <img src="./images/Screenshot-3.png" width=600 a>
-View peeps that you've been mentioned or tagged in!
+
+**View peeps that you've been mentioned or tagged in!**
 <img src="./images/Screenshot-4.png" width=600 a>
-Post comments on peeps and start a conversation!
+
+**Post comments on peeps and start a conversation!**
 <img src="./images/Screenshot-5.png" width=600 a>
 
 Challenge:
